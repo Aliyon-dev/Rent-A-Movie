@@ -1,0 +1,326 @@
+.frame-child {
+  height: 583px;
+  width: 638px;
+  position: absolute;
+  margin: 0 !important;
+  bottom: -303px;
+  left: -207px;
+  z-index: 2;
+}
+.bg-icon {
+  top: 2px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.bg,
+.bg-icon,
+.logo-icon {
+  position: absolute;
+}
+.bg {
+  top: 0;
+  left: 0;
+  background: linear-gradient(
+    138.04deg,
+    rgba(0, 0, 0, 0.8) 3.02%,
+    rgba(2, 28, 93, 0.8) 78.64%,
+    rgba(0, 10, 35, 0.8)
+  );
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.logo-icon {
+  top: 371.2px;
+  left: 157px;
+  width: 49.1px;
+  height: 34px;
+  z-index: 2;
+}
+.bg-parent {
+  height: 902px;
+  width: 860px;
+  position: absolute;
+  margin: 0 !important;
+  bottom: -490px;
+  left: -217.2px;
+}
+.a {
+  color: #4880ff;
+}
+.bright-web {
+  height: 48px;
+  flex: 1;
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  z-index: 2;
+}
+.frame-container,
+.frame-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  max-width: 100%;
+}
+.frame-container {
+  width: 684.5px;
+  justify-content: flex-start;
+  position: relative;
+}
+.frame-wrapper {
+  align-self: stretch;
+  justify-content: flex-end;
+}
+.your-go-to-for {
+  margin: 0;
+  position: relative;
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  font-family: var(--font-poppins);
+  display: inline-block;
+  max-width: 100%;
+  z-index: 2;
+}
+.frame-group,
+.frame-parent {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.frame-group {
+  flex: 1;
+  flex-direction: column;
+  padding: 364px 0 444.6px 157px;
+  box-sizing: border-box;
+  gap: 16.4px;
+}
+.frame-parent {
+  width: 901.7px;
+  flex-direction: row;
+  position: relative;
+  text-align: left;
+  font-size: 39.3px;
+  color: var(--white);
+  font-family: var(--font-open-sans);
+}
+.hello-again {
+  position: relative;
+  font-weight: 700;
+}
+.welcome-back {
+  position: relative;
+  font-size: var(--font-size-lg);
+}
+.hello-again-parent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 var(--padding-xl) 0 0;
+  gap: 3px;
+}
+.codiconmail {
+  height: 24px;
+  width: 24px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  min-height: 24px;
+}
+.email,
+.email-child {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.email-child {
+  width: 99px;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  height: 23px;
+  flex-direction: column;
+  padding: var(--padding-11xs) 0 0;
+  box-sizing: border-box;
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-sm);
+  color: var(--color-darkslategray-200);
+}
+.email {
+  align-self: stretch;
+  border-radius: var(--br-11xl);
+  background-color: var(--white);
+  border: 1px solid var(--color-whitesmoke);
+  flex-direction: row;
+  padding: var(--padding-base) var(--padding-7xl);
+  gap: var(--gap-5xs);
+}
+.bxbxs-lock-alt-icon {
+  height: 24px;
+  width: 24px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  min-height: 24px;
+}
+.password,
+.password-child {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.password-child {
+  width: 68px;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  height: 23px;
+  flex-direction: column;
+  padding: var(--padding-11xs) 0 0;
+  box-sizing: border-box;
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-sm);
+  color: var(--color-darkslategray-200);
+}
+.password {
+  align-self: stretch;
+  border-radius: var(--br-11xl);
+  background-color: var(--white);
+  border: 1px solid var(--color-whitesmoke);
+  flex-direction: row;
+  padding: var(--padding-base) var(--padding-7xl);
+  gap: var(--gap-5xs);
+}
+.login1 {
+  position: relative;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-poppins);
+  color: var(--white);
+  text-align: left;
+  display: inline-block;
+  min-width: 37px;
+}
+.button {
+  cursor: pointer;
+  border: 0;
+  padding: 18px var(--padding-xl);
+  background-color: #0575e6;
+  align-self: stretch;
+  border-radius: var(--br-11xl);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+}
+.button:hover {
+  background-color: #2b9cff;
+}
+.forgot-password {
+  position: relative;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-poppins);
+  color: rgba(51, 51, 51, 0.7);
+  text-align: left;
+  display: inline-block;
+  min-width: 116px;
+}
+.forgot-password-wrapper {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 var(--padding-xl) 0 21px;
+}
+.email-parent,
+.frame-div {
+  align-self: stretch;
+  flex-direction: column;
+}
+.email-parent {
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 16.3px;
+}
+.frame-div {
+  gap: 40px;
+}
+.frame-div,
+.login,
+.login-inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.login-inner {
+  width: 307px;
+  flex-direction: column;
+  padding: 272px 0 0;
+  box-sizing: border-box;
+}
+.login {
+  width: 100%;
+  position: relative;
+  background-color: var(--white);
+  overflow: hidden;
+  flex-direction: row;
+  gap: 95.3px;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  font-size: 26px;
+  color: var(--color-darkslategray-100);
+  font-family: var(--font-poppins);
+}
+@media screen and (max-width: 1250px) {
+  .login {
+    flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 1050px) {
+  .frame-group {
+    padding-left: 78px;
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 750px) {
+  .bright-web {
+    font-size: 31px;
+  }
+  .frame-group {
+    padding-top: 237px;
+    padding-bottom: 289px;
+    box-sizing: border-box;
+  }
+  .login-inner {
+    padding-top: 177px;
+    box-sizing: border-box;
+  }
+  .login {
+    gap: 48px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .bright-web {
+    font-size: 24px;
+  }
+  .frame-group {
+    padding-left: 39px;
+    box-sizing: border-box;
+  }
+  .hello-again {
+    font-size: 21px;
+  }
+  .frame-div {
+    gap: 20px;
+  }
+  .login {
+    gap: 24px;
+  }
+}

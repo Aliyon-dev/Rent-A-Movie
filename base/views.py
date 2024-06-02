@@ -11,4 +11,17 @@ def home(request):
 
 #function to handle login from the user
 def login(request):
-    return HttpResponse("Login")
+    email = request.POST.get("email")
+    password = request.POST.get("password")
+    
+    #### authenticate
+    
+    #### if valid, login
+        #### once logged take user to home page
+        
+    
+    #### Return an error and ask user to try again
+    
+    print(f'the {email} and {password}')
+    
+    return render(request, 'login.html')

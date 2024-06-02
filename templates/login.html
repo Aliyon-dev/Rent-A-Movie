@@ -1,0 +1,95 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open Sans:wght@700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+    />
+  </head>
+  <body>
+    <div class="login">
+      <section class="frame-parent">
+        <img class="frame-child" alt="" src="./public/group-2.svg" />
+
+        <div class="frame-group">
+          <div class="frame-wrapper">
+            <div class="frame-container">
+              <div class="bg-parent">
+                <img class="bg-icon" alt="" src="./public/bg@2x.png" />
+
+                <div class="bg"></div>
+                <img
+                  class="logo-icon"
+                  loading="lazy"
+                  alt=""
+                  src="./public/logo.svg"
+                />
+              </div>
+              <b class="bright-web">
+                <span>Rent</span>
+                <span class="a">A</span>
+                <span>Movie</span>
+              </b>
+            </div>
+          </div>
+          <blockquote class="your-go-to-for">
+            "Your Go-To for Movie Rentals: Stream with Ease!"
+          </blockquote>
+        </div>
+      </section>
+      <div class="login-inner">
+        <div class="frame-div">
+          <div class="hello-again-parent">
+            <b class="hello-again">Hello Again!</b>
+            <div class="welcome-back">Welcome Back</div>
+          </div>
+          <form class="email-parent" method="post" action='/login'>
+            {% csrf_token %}
+            <div class="email">
+              <img class="codiconmail" alt="" src="./public/codiconmail.svg" />
+
+              <input
+                class="email-child"
+                placeholder="user name"
+                type="text"
+                name="email"
+              />
+            </div>
+            <div class="password">
+              <img
+                class="bxbxs-lock-alt-icon"
+                alt=""
+                src="./public/bxbxslockalt.svg"
+              />
+
+              <input
+                class="password-child"
+                placeholder="Password"
+                type="text"
+                name="password"
+              />
+            </div>
+            <button class="button">
+              <div class="login1">Login</div>
+            </button>
+            <div class="forgot-password-wrapper">
+              <div class="forgot-password">Forgot Password</div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
