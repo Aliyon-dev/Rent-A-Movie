@@ -5,13 +5,13 @@ from django.http import HttpResponse
 
 # function to render the home page
 def home(request):
-    return render(request, 'base.html')
+    return render(request, 'index.html')
 
 
 
 #function to handle login from the user
 def login(request):
-    email = request.POST.get("email")
+    email = request.POST.get("username")
     password = request.POST.get("password")
     
     #### authenticate
@@ -25,3 +25,10 @@ def login(request):
     print(f'the {email} and {password}')
     
     return render(request, 'login.html')
+
+
+def customers(request):
+    return render(request, 'customers.html')
+
+def movies(request):
+    return render(request, 'movies.html')

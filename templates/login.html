@@ -1,91 +1,409 @@
 {% load static %}
 
-
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
 
-    <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Open Sans:wght@700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito Sans:wght@600;700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Signika:wght@500&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open Sans:wght@600;700&display=swap"
     />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
     />
+
+    <style>
+      body {
+        margin: 0;
+        line-height: normal;
+      }
+    </style>
   </head>
   <body>
-    <div class="login">
-      <section class="frame-parent">
-        <img class="frame-child" alt="" src="./public/group-2.svg" />
+    <div
+      style="
+        width: 100%;
+        position: relative;
+        background-color: #fff;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 95.3px;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        font-size: 26px;
+        color: #333;
+        font-family: Poppins;
+      "
+    >
+      <section
+        style="
+          width: 901.7px;
+          display: flex;
+          flex-direction: row;
+          align-items: flex-start;
+          justify-content: flex-start;
+          position: relative;
+          max-width: 100%;
+          text-align: left;
+          font-size: 39.3px;
+          color: #fff;
+          font-family: 'Open Sans';
+        "
+      >
 
-        <div class="frame-group">
-          <div class="frame-wrapper">
-            <div class="frame-container">
-              <div class="bg-parent">
-                <img class="bg-icon" alt="" src="./public/bg@2x.png" />
+      <!--Background image-->
+        <img
+          style="
+            height: 583px;
+            width: 638px;
+            position: absolute;
+            margin: 0 !important;
+            bottom: -303px;
+            left: -207px;
+            z-index: 2;
+          "
+          alt=""
+          src="{% static './public/group-2.svg' %}"
+        />
 
-                <div class="bg"></div>
+
+        <div
+          style="
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            padding: 364px 0px 444.6px 157px;
+            box-sizing: border-box;
+            gap: 16.4px;
+            max-width: 100%;
+          "
+        >
+          <div
+            style="
+              align-self: stretch;
+              display: flex;
+              flex-direction: row;
+              align-items: flex-start;
+              justify-content: flex-end;
+              max-width: 100%;
+            "
+          >
+            <div
+              style="
+                width: 684.5px;
+                display: flex;
+                flex-direction: row;
+                align-items: flex-start;
+                justify-content: flex-start;
+                position: relative;
+                max-width: 100%;
+              "
+            >
+              <div
+                style="
+                  height: 902px;
+                  width: 860px;
+                  position: absolute;
+                  margin: 0 !important;
+                  bottom: -490px;
+                  left: -217.2px;
+                "
+              >
                 <img
-                  class="logo-icon"
+                  style="
+                    position: absolute;
+                    top: 2px;
+                    left: 0px;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                  "
+                  alt=""
+                  src="{% static '/public/bg@2x.png' %}"
+                />
+
+                <div
+                  style="
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    background: linear-gradient(
+                      138.04deg,
+                      rgba(0, 0, 0, 0.8) 3.02%,
+                      rgba(2, 28, 93, 0.8) 78.64%,
+                      rgba(0, 10, 35, 0.8)
+                    );
+                    width: 100%;
+                    height: 100%;
+                    z-index: 1;
+                  "
+                ></div>
+                <img
+                  style="
+                    position: absolute;
+                    top: 371.2px;
+                    left: 157px;
+                    width: 49.1px;
+                    height: 34px;
+                    z-index: 2;
+                  "
                   loading="lazy"
                   alt=""
-                  src="./public/logo.svg"
+                  src="{% static './public/logo.svg' %}"
                 />
               </div>
-              <b class="bright-web">
+              <b
+                style="
+                  height: 48px;
+                  flex: 1;
+                  position: relative;
+                  display: inline-block;
+                  max-width: 100%;
+                  z-index: 2;
+                "
+              >
                 <span>Rent</span>
-                <span class="a">A</span>
+                <span style="color: #4880ff">A</span>
                 <span>Movie</span>
               </b>
             </div>
           </div>
-          <blockquote class="your-go-to-for">
+          <blockquote
+            style="
+              margin: 0;
+              position: relative;
+              font-size: 18px;
+              font-weight: 500;
+              font-family: Poppins;
+              display: inline-block;
+              max-width: 100%;
+              z-index: 2;
+            "
+          >
             "Your Go-To for Movie Rentals: Stream with Ease!"
           </blockquote>
         </div>
       </section>
-      <div class="login-inner">
-        <div class="frame-div">
-          <div class="hello-again-parent">
-            <b class="hello-again">Hello Again!</b>
-            <div class="welcome-back">Welcome Back</div>
+      <div
+        style="
+          width: 307px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          padding: 272px 0px 0px;
+          box-sizing: border-box;
+        "
+      >
+        <div
+          style="
+            align-self: stretch;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            gap: 40px;
+          "
+        >
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              justify-content: flex-start;
+              padding: 0px 20px 0px 0px;
+              gap: 3px;
+            "
+          >
+            <b style="position: relative; font-weight: 700">Hello Again!</b>
+            <div style="position: relative; font-size: 18px">Welcome Back</div>
           </div>
-          <form class="email-parent" method="post" action='/login'>
-            {% csrf_token %}
-            <div class="email">
-              <img class="codiconmail" alt="" src="./public/codiconmail.svg" />
+
+          {% csrf_token %}
+          <form
+            style="
+              margin: 0;
+              align-self: stretch;
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              justify-content: flex-start;
+              gap: 16.3px;
+            "
+            method=post
+            action=''
+          >
+          {% csrf_token %}
+            <div
+              style="
+                align-self: stretch;
+                border-radius: 30px;
+                background-color: #fff;
+                border: 1px solid #eee;
+                display: flex;
+                flex-direction: row;
+                align-items: flex-start;
+                justify-content: flex-start;
+                padding: 16px 26px;
+                gap: 8px;
+              "
+            >
+              <img
+                style="
+                  height: 24px;
+                  width: 24px;
+                  position: relative;
+                  overflow: hidden;
+                  flex-shrink: 0;
+                  min-height: 24px;
+                "
+                alt=""
+                src="{% static './public/codiconmail.svg' %}"
+              />
 
               <input
-                class="email-child"
-                placeholder="user name"
+                style="
+                  width: 99px;
+                  border: none;
+                  outline: none;
+                  background-color: transparent;
+                  height: 23px; 
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-start;
+                  justify-content: flex-start;
+                  padding: 2px 0px 0px;
+                  box-sizing: border-box;
+                  font-family: Poppins;
+                  font-size: 14px;
+                  color: rgba(51, 51, 51, 0.3);
+                "
+                placeholder="Username"
                 type="text"
-                name="email"
+                name="username"
               />
             </div>
-            <div class="password">
+            <div
+              style="
+                align-self: stretch;
+                border-radius: 30px;
+                background-color: #fff;
+                border: 1px solid #eee;
+                display: flex;
+                flex-direction: row;
+                align-items: flex-start;
+                justify-content: flex-start;
+                padding: 16px 26px;
+                gap: 8px;
+              "
+            >
               <img
-                class="bxbxs-lock-alt-icon"
+                style="
+                  height: 24px;
+                  width: 24px;
+                  position: relative;
+                  overflow: hidden;
+                  flex-shrink: 0;
+                  min-height: 24px;
+                "
                 alt=""
-                src="./public/bxbxslockalt.svg"
+                src="{% static './public/bxbxslockalt.svg' %}"
               />
 
               <input
-                class="password-child"
+                style="
+                  width: 68px;
+                  border: none;
+                  outline: none;
+                  background-color: transparent;
+                  height: 23px;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-start;
+                  justify-content: flex-start;
+                  padding: 2px 0px 0px;
+                  box-sizing: border-box;
+                  font-family: Poppins;
+                  font-size: 14px;
+                  color: rgba(51, 51, 51, 0.3);
+                "
                 placeholder="Password"
                 type="text"
                 name="password"
               />
             </div>
-            <button class="button">
-              <div class="login1">Login</div>
+            <button
+              style="
+                cursor: pointer;
+                border: none;
+                padding: 18px 20px;
+                background-color: #0575e6;
+                align-self: stretch;
+                border-radius: 30px;
+                display: flex;
+                flex-direction: row;
+                align-items: flex-start;
+                justify-content: center;
+              "
+            >
+              <div
+                style="
+                  position: relative;
+                  font-size: 14px;
+                  font-family: Poppins;
+                  color: #fff;
+                  text-align: left;
+                  display: inline-block;
+                  min-width: 37px;
+                "
+              >
+                Login
+              </div>
             </button>
-            <div class="forgot-password-wrapper">
-              <div class="forgot-password">Forgot Password</div>
+            <div
+              style="
+                align-self: stretch;
+                display: flex;
+                flex-direction: row;
+                align-items: flex-start;
+                justify-content: center;
+                padding: 0px 20px 0px 21px;
+              "
+            >
+              <div
+                style="
+                  position: relative;
+                  font-size: 14px;
+                  font-family: Poppins;
+                  color: rgba(51, 51, 51, 0.7);
+                  text-align: left;
+                  display: inline-block;
+                  min-width: 116px;
+                "
+              >
+                Forgot Password
+              </div>
             </div>
           </form>
         </div>

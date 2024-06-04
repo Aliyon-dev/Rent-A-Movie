@@ -1,0 +1,406 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href=".{% static 'css/index.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito Sans:wght@600;700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Signika:wght@500&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open Sans:wght@600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+    />
+  </head>
+  <body>
+    <div class="dashboard-1">
+      <div class="main-bg-color-parent">
+        <main class="main-bg-color">
+          <section class="main-bg"></section>
+        </main>
+        <header class="nav">
+          <div class="header">
+            <div class="text-wrapper">
+              <div class="text">
+                <b class="title">Hi, Aliyon!</b>
+                <div class="body">Let’s check your progress today</div>
+              </div>
+            </div>
+            <div class="search-wrapper">
+              <div class="search">
+                <div class="name">
+                  <img class="search-icon" alt="" src="{% static './public/search.svg'%}" />
+
+                  <input class="body1" placeholder="Search..." type="text" />
+                </div>
+              </div>
+            </div>
+            <div class="header-inner">
+              <div class="frame-parent">
+                <div class="divider-wrapper">
+                  <div class="divider"></div>
+                </div>
+                <div class="profile">
+                  <div class="avatar">
+                    <div class="avatar1">
+                      <div class="avatar2">
+                        <img
+                          class="outline-border-icon"
+                          alt=""
+                          src="{% static './public/outline-border.svg' %}"
+                        />
+
+                        <img
+                          class="image-icon"
+                          alt=""
+                          src="{% static './public/image@2x.png'%}"
+                        />
+
+                        <div class="initials">
+                          <div class="background"></div>
+                          <div class="initials1">AB</div>
+                        </div>
+                        <div class="icon">
+                          <div class="background1"></div>
+                          <img
+                            class="essentials-user-circle"
+                            loading="lazy"
+                            alt=""
+                            src="{% static './public/essentials--usercircle.svg'%}"
+                          />
+                        </div>
+                        <div class="add">
+                          <div class="background2"></div>
+                          <img
+                            class="basics-add"
+                            alt=""
+                            src="{% static './public/basics--add.svg'%}"
+                          />
+                        </div>
+                      
+                        <img
+                          class="bottom-plus-icon"
+                          alt=""
+                          src="{% static './public/bottom-plus.svg'%}"
+                        />
+
+                        <div class="indicator-bottom">
+                          <div class="large2"></div>
+                          <div class="medium2"></div>
+                          <div class="small2"></div>
+                        </div>
+                        <div class="indicator-top">
+                          <div class="large3"></div>
+                          <div class="medium3"></div>
+                          <div class="small3"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text-container">
+                    <div class="text1">
+                      <b class="title1">Aliyon Tembo</b>
+                      <div class="body2">Admin</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <img class="icon1" alt="" src="{% static './public/icon.svg'%}" />
+
+            <img class="icon2" alt="" src="{% static './public/icon.svg'%}" />
+          </div>
+        </header>
+        <img
+          class="separator-icon"
+          loading="lazy"
+          alt=""
+          src="{% static './public/separator.svg'%}"
+        />
+
+
+
+        <!-- Top Graph w-->
+        <!--<h1 class="dashboard">Dashboard</h1>-->
+        <div class="total-users">
+          <div class="bg"></div>
+          <div class="frame-group">
+            <div class="total-user-parent">
+              <b class="total-user">Total Customers</b>
+              <b class="b4">40,689</b>
+            </div>
+            <img
+              class="icon3"
+              loading="lazy"
+              alt=""
+              src="{% static './public/icon@2x.png'%}"
+            />
+          </div>
+          <div class="ic-trending-up-24px-parent">
+            <img
+              class="ic-trending-up-24px-icon"
+              loading="lazy"
+              alt=""
+              src="{% static './public/ictrendingup24px.svg'%}"
+            />
+
+            <div class="up-from-yesterd-wrapper">
+              <div class="up-from-yesterd-container">
+                <span>8.5%</span>
+                <span class="span"> </span>
+                <span class="up-from-yesterday">Up from yesterday</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="total-order">
+          <div class="bg1"></div>
+          <div class="frame-container">
+            <div class="total-order-parent">
+              <b class="total-order1">Total Movies</b>
+              <b class="b5">10293</b>
+            </div>
+            <img class="icon4" alt="" src="{% static './public/icon-1@2x.png'%}" />
+          </div>
+          <div class="ic-trending-up-24px-group">
+            <img
+              class="ic-trending-up-24px-icon1"
+              alt=""
+              src="{% static './public/ictrendingup24px.svg'%}"
+            />
+
+            <div class="up-from-past-we-wrapper">
+              <div class="up-from-past-container">
+                <span>1.3%</span>
+                <span class="span1"> </span>
+                <span class="up-from-past">Up from past week</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="total-sales">
+          <div class="bg2"></div>
+          <div class="frame-div">
+            <div class="total-sales-parent">
+              <div class="total-sales1">Movies rented out</div>
+              <b class="b6">100</b>
+            </div>
+            <img class="icon5" alt="" src="{% static './public/icon-2@2x.png'%}" />
+          </div>
+          <div class="ic-trending-down-24px-parent">
+            <img
+              class="ic-trending-down-24px-icon"
+              loading="lazy"
+              alt=""
+              src="./public/ictrendingdown24px.svg"
+            />
+
+            <div class="down-from-yeste-wrapper">
+              <div class="down-from-yeste-container">
+                <span>4.3%</span>
+                <span class="span2"> </span>
+                <span class="down-from-last">Down from last week</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <!-- Graph -->
+        <div class="order-pending">
+          <div class="bg3"></div>
+          <div class="total-pending-parent">
+            <div class="total-pending">Total pending returns</div>
+            <b class="b7">2040</b>
+          </div>
+          <img class="icon6" alt="" src="{% static './public/icon-3@2x.png'%}" />
+        </div>
+        <div class="sales-details">
+          <img class="card-icon" alt="" src="{% static './public/card.sv'%}g" />
+
+          <div class="frame-parent1">
+            <div class="sales-wrapper">
+              <b class="sales">Sales Details</b>
+            </div>
+            <div class="month-selector">
+              <div class="rectangle"></div>
+              <b class="october">October</b>
+              <div class="icon-chevron-down">
+                <div class="frame"></div>
+                <img class="shape-icon" alt="" src="{% static './public/shape.svg'%}" />
+              </div>
+            </div>
+          </div>
+          <div class="frame-parent2">
+            <div class="frame-parent3">
+              <div class="parent">
+                <b class="b8">100%</b>
+                <b class="b9">80%</b>
+                <b class="b10">60%</b>
+                <b class="b11">40%</b>
+                <b class="b12">20%</b>
+              </div>
+              <div class="frame-wrapper">
+                <div class="line-parent">
+                  <img class="line-icon" alt="" src="{% static './public/line.svg'%}" />
+
+                  <img
+                    class="graph-icon"
+                    loading="lazy"
+                    alt=""
+                    src="./public/graph.svg"
+                  />
+
+                  <div class="combined-shape-parent">
+                    <img
+                      class="combined-shape-icon"
+                      loading="lazy"
+                      alt=""
+                      src="./public/combined-shape.svg"
+                    />
+
+                    <b class="b13">64,3664.77</b>
+                  </div>
+                  <img class="point-icon" alt="" src="{% static './public/point.svg'%}" />
+                </div>
+              </div>
+            </div>
+            <div class="frame-wrapper1">
+              <div class="frame-parent4">
+                <div class="k-wrapper">
+                  <b class="k">January</b>
+                </div>
+                <div class="k-container">
+                  <b class="k1">February</b>
+                </div>
+                <div class="k-frame">
+                  <b class="k2">March</b>
+                </div>
+                <div class="k-wrapper1">
+                  <b class="k3">April</b>
+                </div>
+                <div class="k-wrapper2">
+                  <b class="k4">May</b>
+                </div>
+                <div class="k-wrapper3">
+                  <b class="k5">June</b>
+                </div>
+                <div class="k-wrapper4">
+                  <b class="k6">July</b>
+                </div>
+                <div class="k-wrapper5">
+                  <b class="k7">August</b>
+                </div>
+                <div class="k-wrapper6">
+                  <b class="k8">September</b>
+                </div>
+                <div class="k-wrapper7">
+                  <b class="k9">October</b>
+                </div>
+                <b class="k10">November</b>
+                <b class="k11">December</b>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+
+
+
+      <!--Side Bar -->
+      <div class="navigation-sidebar-menu-li1">
+        <div class="side-bar">
+          <div class="frame-parent5">
+            <div class="hide-bg-copy-wrapper">
+              <div class="hide-bg-copy1"></div>
+            </div>
+            <button class="menu-itemstandard">
+              <div class="icon-parent">
+                <img class="icon7" alt="" src="{% static './public/icon-4.svg'%}" />
+
+                <div class="menu-item-wrapper">
+                  <b class="menu-item">Dashboard</b>
+                </div>
+              </div>
+            </button>
+          </div>
+          <div class="frame-parent6" id="frameContainer1">
+            <div class="hide-bg-copy-container">
+              <div class="hide-bg-copy2"></div>
+            </div>
+            <div class="menu-itemstandard1">
+              <div class="iconlyregularlight3-user-parent">
+                <img
+                  class="iconlyregularlight3-user"
+                  alt=""
+                  src="{% static './public/iconlyregularlight3-user.svg'%}"
+                />
+
+                <div class="menu-item-container">
+                  <b class="menu-item1">Customers</b>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="frame-parent7" id="frameContainer2">
+            <div class="hide-bg-copy-frame">
+              <div class="hide-bg-copy3"></div>
+            </div>
+            <div class="menu-itemstandard2">
+              <div class="bx-movie-playsvg-parent">
+                <img
+                  class="bx-movie-playsvg-icon"
+                  alt=""
+                  src="{% static './public/bxmovieplaysvg.svg'%}"
+                />
+
+                <div class="menu-item-frame">
+                  <b class="menu-item2">Movies</b>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <img class="divider-icon2" alt="" src="{% static './public/divider-2.svg'%}" />
+      </div>
+      <img class="frame-icon" loading="lazy" alt="" src="{% static './public/frame.svg'%}" />
+    </div>
+
+    <script>
+      var frameContainer1 = document.getElementById("frameContainer1");
+      if (frameContainer1) {
+        frameContainer1.addEventListener("click", function (e) {
+          window.location.href = "./customers.html";
+        });
+      }
+      
+      var frameContainer2 = document.getElementById("frameContainer2");
+      if (frameContainer2) {
+        frameContainer2.addEventListener("click", function (e) {
+          window.location.href = "./movies.html";
+        });
+      }
+      </script>
+  </body>
+</html>
