@@ -387,20 +387,6 @@
       <img class="frame-icon" loading="lazy" alt="" src="{% static './public/frame.svg'%}" />
     </div>
 
-    <script>
-      var frameContainer1 = document.getElementById("frameContainer1");
-      if (frameContainer1) {
-        frameContainer1.addEventListener("click", function (e) {
-          window.location.href = "./customers.html";
-        });
-      }
-      
-      var frameContainer2 = document.getElementById("frameContainer2");
-      if (frameContainer2) {
-        frameContainer2.addEventListener("click", function (e) {
-          window.location.href = "./movies.html";
-        });
-      }
-      </script>
+    <script src="{% static '/script/script.js' %}">
   </body>
 </html>

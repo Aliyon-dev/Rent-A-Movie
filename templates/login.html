@@ -238,6 +238,11 @@
           >
             <b style="position: relative; font-weight: 700">Hello Again!</b>
             <div style="position: relative; font-size: 18px">Welcome Back</div>
+
+            {% if error %}
+              <p style=" font-size: 16px; color: red">{{error}} </>
+            {% endif %}
+              
           </div>
 
           {% csrf_token %}
