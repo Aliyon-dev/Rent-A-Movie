@@ -31,3 +31,19 @@ def customers(request):
 
 def movies(request):
     return render(request, 'movies.html')
+
+
+
+
+def add_customer(request):
+    if request.method=='POST':
+        Fname = request.POST.get("name")
+        Lname = request.POST.get("Lname")
+        
+        print(request.POST)
+    return render(request, 'add_customers.html')
+
+
+def test(request):
+    return render(request, 'base.html')
+
