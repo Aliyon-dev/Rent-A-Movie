@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate
 from django.contrib import messages
 from django.shortcuts import redirect
+from  .models import Customer
 # Create your views here.
 
 # function to render the home page
@@ -37,9 +38,11 @@ def movies(request):
 
 def add_customer(request):
     if request.method=='POST':
-        Fname = request.POST.get("name")
-        Lname = request.POST.get("Lname")
-        
+        form =Customer(request.POST)
+        if form.is_valid():
+            #getting user details
+            Fname=form.cleand
+      
         print(request.POST)
     return render(request, 'add_customers.html')
 
