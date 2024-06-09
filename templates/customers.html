@@ -58,7 +58,7 @@
                       </div>
                       <div class="form-group">
                           <label for="name">Phone number </label>
-                          <input type="text" class="form-control" id="phone" name="name" required>
+                          <input type="text" class="form-control" id="phone" name="phone" required>
                       </div>
                       <div class="form-group">
                           <label for="email">Email</label>
@@ -68,13 +68,13 @@
 
                       <div class="form-group">
                         <label for="email">Zip Code</label>
-                        <input type="integer" class="form-control" id="zipcode" name="zipcode" required>
+                        <input type="number" class="form-control" id="zipcode" name="zipcode" required>
                     </div>
 
                       <div class="form-group row ">
                         <div class="col">
                           <label for="name">City</label>
-                          <input type="text" class="form-control" id="City" name="name" required>
+                          <input type="text" class="form-control" id="city" name="name" required>
                         </div>
 
                         <div class="col">
@@ -117,21 +117,26 @@
                 <div class="item-container">
                   <div class="hide-bg-copy4"></div>
                 </div>
+
+
+              <a href="{% url 'home' %}" class="menu-item-link" style="text-decoration: none; color:#000"> 
                 <div class="menu-itemstandard3">
                   <div class="menu-item-content">
                     <img
                       class="icon8"
                       loading="lazy"
                       alt=""
-                      src="{% static './public/icon11.svg' %}"
-                    />
+                      src="{% static './public/icon11.svg' %}"/>
 
                     <div class="label">
                       <b class="menu-item3">Dashboard</b>
                     </div>
                   </div>
                 </div>
-              </div>
+              </a>
+            </div>
+
+          <a href="{% url 'customers' %}" class="menu-item-link" style="text-decoration: none">
               <div class="frame-parent11">
                 <div class="hide-bg-copy-wrapper1">
                   <div class="hide-bg-copy5"></div>
@@ -141,15 +146,17 @@
                     <img
                       class="iconlyregularlight3-user1"
                       alt=""
-                      src="{% static './public/iconlyregularlight3-user1.svg'%}"
-                    />
-
+                      src="{% static './public/iconlyregularlight3-user1.svg'%}"/>
                     <div class="menu-item-wrapper1">
                       <b class="menu-item4">Customers</b>
                     </div>
                   </div>
                 </button>
               </div>
+            </a>
+
+
+            <a href="{% url 'movies' %}" class="menu-item-link" style="text-decoration: none; color: #000; font-weight: 500">
               <div class="frame-parent12" id="frameContainer2">
                 <div class="hide-bg-copy-wrapper2">
                   <div class="hide-bg-copy6"></div>
@@ -169,6 +176,9 @@
                 </div>
               </div>
             </div>
+          </a>
+
+
             <img
               class="divider-icon3"
               loading="lazy"
@@ -270,159 +280,87 @@
 
             
             <!-- Table Header -->
-            <div class="thead">
+    <div class="thead">
+        <div class="id-header">
+            <input class="checkbox13" type="checkbox" />
+            <div class="id-label">
+                <div class="id">ID</div>
+            </div>
+        </div>
+        <div class="name-header" style="margin-left: -60px">
+            <div class="name-label">
+                <div class="name1">First Name</div>
+            </div>
+        </div>
+        <div class="header-cell" style="margin-left: -100px">
+            <div class="contact">Last Name</div>
+        </div>
+        <div class="header-cell1">
+            <div class="email1">Email</div>
+        </div>
+        <div class="header-cell2">
+            <div class="age">Contact</div>
+        </div>
+        <div class="header-cell3">
+            <div class="gender">State</div>
+        </div>
+        <div class="header-cell4">
+            <div class="city">City</div>
+        </div>
+        <div class="action-header">
+            <div class="actions">Actions</div>
+        </div>
+    </div>
+            <!-- Table head end-->
+
+
+            <!-- Table Rows  -->
+
+            <!-- Table Rows end  -->
+          </div>
+
+          <div class="tbody">
+            <div class="row">
               <div class="id-header">
-                <input class="checkbox13" type="checkbox" />
-
-                <div class="id-label">
-                  <div class="id">ID</div>
-                </div>
+                  <input class="checkbox13" type="checkbox" />
+                  <div class="id-label" style="margin-left: -60px">
+                      <div class="id">1</div>
+                  </div>
               </div>
-              <div class="name-header">
-                <div class="name-label">
-                  <div class="name1">First Name</div>
-                </div>
+              <div class="name-header" style="margin-left: -120px">
+                  <div class="name-label">
+                      <div class="name1">John</div>
+                  </div>
               </div>
-
-
-
-              <div class="header-cell">
-                <div class="contact">Last Name</div>
+              <div class="header-cell" style="margin-left: -60px">
+                  <div class="contact">Doe</div>
               </div>
-
-
-
               <div class="header-cell1">
-                <div class="email1">Email</div>
+                  <div class="email1">john.doe@example.com</div>
               </div>
-
-
               <div class="header-cell2">
-                <div class="age">Contact</div>
+                  <div class="age">123-456-7890</div>
               </div>
-
-
-
               <div class="header-cell3">
-                <div class="gender">State</div>
+                  <div class="gender">California</div>
               </div>
-
-              
               <div class="header-cell4">
-                <div class="city">City</div>
+                  <div class="city">Los Angeles</div>
               </div>
               <div class="action-header">
-                <div class="actions">Actions</div>
+                  <div class="actions">
+                      <button class="btn btn-primary">Edit</button>
+                     <!-- <button class="btn btn-secondary">Delete</button> -->
+                  </div>
               </div>
-            </div>
+          </div>
+          
+
+
+
           </div>
 
 
-
-
-          <!-- Table Body -->
-          <div class="thead">
-            <div class="id-header">
-              <input class="checkbox13" type="checkbox" />
-              <div class="id-label">
-                <div class="id">ID</div>
-              </div>
-            </div>
-            <div class="name-header">
-              <div class="name-label">
-                <div class="name1">First Name</div>
-              </div>
-            </div>
-            <div class="header-cell">
-              <div class="contact">Last Name</div>
-            </div>
-            <div class="header-cell1">
-              <div class="email1">Email</div>
-            </div>
-            <div class="header-cell2">
-              <div class="age">Contact</div>
-            </div>
-            <div class="header-cell3">
-              <div class="gender">State</div>
-            </div>
-
-            <div class="header-cell4">
-              <div class="city">City</div>
-            </div>
-            <div class="action-header">
-              <div class="actions">Actions</div>
-            </div>
-          </div>
-
-
-
-
-          <div class="thead">
-            <div class="id-header">
-              <input class="checkbox13" type="checkbox" />
-              <div class="id-label">
-                <div class="id">ID</div>
-              </div>
-            </div>
-            <div class="name-header">
-              <div class="name-label">
-                <div class="name1">First Name</div>
-              </div>
-            </div>
-            <div class="header-cell">
-              <div class="contact">Last Name</div>
-            </div>
-            <div class="header-cell1">
-              <div class="email1">Email</div>
-            </div>
-            <div class="header-cell2">
-              <div class="age">Contact</div>
-            </div>
-            <div class="header-cell3">
-              <div class="gender">State</div>
-            </div>
-
-            <div class="header-cell4">
-              <div class="city">City</div>
-            </div>
-            <div class="action-header">
-              <div class="actions">Actions</div>
-            </div>
-          </div>
-
-
-          <div class="thead">
-            <div class="id-header">
-              <input class="checkbox13" type="checkbox" />
-              <div class="id-label">
-                <div class="id">ID</div>
-              </div>
-            </div>
-            <div class="name-header">
-              <div class="name-label">
-                <div class="name1">First Name</div>
-              </div>
-            </div>
-            <div class="header-cell">
-              <div class="contact">Last Name</div>
-            </div>
-            <div class="header-cell1">
-              <div class="email1">Email</div>
-            </div>
-            <div class="header-cell2">
-              <div class="age">Contact</div>
-            </div>
-            <div class="header-cell3">
-              <div class="gender">State</div>
-            </div>
-
-            <div class="header-cell4">
-              <div class="city">City</div>
-            </div>
-            <div class="action-header">
-              <div class="actions">Actions</div>
-            </div>
-          </div>
 
 
           

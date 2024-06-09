@@ -3624,8 +3624,11 @@
   z-index: 1;
   text-align: left;
   font-size: 14px;
-  color: #092c4c;
+  color: #092C4C;
   font-family: Inter;
+  margin-top: -20px;
+  margin-bottom: -20px;
+  background-color: #F4F5F7;
 }
 .body3 {
   flex: 1;
@@ -3787,6 +3790,50 @@
   justify-content: flex-start;
   padding: 2px 0 0;
 }
+
+
+
+.id-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.checkbox13 {
+  margin-right: 10px;
+}
+.id-label, .name-label, .header-cell, .header-cell1, .header-cell2, .header-cell3, .header-cell4, .action-header {
+  display: flex;
+  align-items: center;
+}
+
+
+.tbody {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+  padding-right: 10px;
+}
+.tbody .row {
+  padding: 0px, 0px, 0px, 10px;
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+  gap: 20px;
+  flex-direction: row;
+  padding: 10px;
+  align-items: center;
+  /*  border-bottom: 1px solid #ccc; */
+}
+.tbody .row div {
+  flex: 1;
+  padding: 5px;
+}
+
+
+
+
+
 .thead {
   width: 100%;
   display: flex;

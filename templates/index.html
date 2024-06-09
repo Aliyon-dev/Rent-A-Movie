@@ -334,7 +334,9 @@
             <div class="hide-bg-copy-wrapper">
               <div class="hide-bg-copy1"></div>
             </div>
-            <button class="menu-itemstandard">
+
+          <a href="{% url 'home' %}" class="menu-item-link" style="text-decoration: none">
+            <div class="menu-itemstandard">
               <div class="icon-parent">
                 <img class="icon7" alt="" src="{% static './public/icon-4.svg'%}" />
 
@@ -342,43 +344,50 @@
                   <b class="menu-item">Dashboard</b>
                 </div>
               </div>
-            </button>
-          </div>
+            </div>
+        </a>
+    </div>
           <div class="frame-parent6" id="frameContainer1">
             <div class="hide-bg-copy-container">
               <div class="hide-bg-copy2"></div>
             </div>
-            <div class="menu-itemstandard1">
-              <div class="iconlyregularlight3-user-parent">
-                <img
-                  class="iconlyregularlight3-user"
-                  alt=""
-                  src="{% static './public/iconlyregularlight3-user.svg'%}"
-                />
 
-                <div class="menu-item-container">
-                  <b class="menu-item1">Customers</b>
+
+
+            <a href="{% url 'customers' %}" class="menu-item-link" style="text-decoration: none">
+              <div class="menu-itemstandard1">
+                <div class="iconlyregularlight3-user-parent">
+                  <img
+                    class="iconlyregularlight3-user"
+                    alt="Customers Icon"
+                    src="{% static 'public/iconlyregularlight3-user.svg' %}"
+                  />
+                  <div class="menu-item-container">
+                    <b class="menu-item1">Customers</b>
+                  </div>
                 </div>
               </div>
-            </div>
+            </a>
           </div>
           <div class="frame-parent7" id="frameContainer2">
             <div class="hide-bg-copy-frame">
               <div class="hide-bg-copy3"></div>
             </div>
+          
+
+          <a href="{% url 'movies' %}" class="menu-item-link" style="text-decoration: none">
             <div class="menu-itemstandard2">
               <div class="bx-movie-playsvg-parent">
                 <img
                   class="bx-movie-playsvg-icon"
                   alt=""
-                  src="{% static './public/bxmovieplaysvg.svg'%}"
-                />
-
+                  src="{% static './public/bxmovieplaysvg.svg'%}"/>
                 <div class="menu-item-frame">
                   <b class="menu-item2">Movies</b>
                 </div>
               </div>
             </div>
+          </a>  
           </div>
         </div>
 

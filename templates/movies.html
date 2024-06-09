@@ -1,10 +1,14 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
 
-    <link rel="stylesheet" href="./dashboard-11.css" />
+    <link rel="stylesheet" href="{% static 'css/movies.css' %}" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
@@ -27,945 +31,537 @@
     />
   </head>
   <body>
-    <div class="dashboard-12">
-      <div class="dashboard-1-inner">
-        <div class="frame-parent24">
-          <div class="frame-frame">
+    <div>
+          <!-- Modal -->
+    <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="contactModalLabel"> Add Movie </h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <form id="contactForm" method="post">
+
+                      <div class="form-group">
+                          <label for="name"> Movie Title </label>
+                          <input type="text" class="form-control" id="title" name="title" required>
+                      </div>
+
+                    <div class="modal--body">
+                      <label for="email">Genre</label>
+                      <select id="dataDropdown" class="form-control">
+                        <option value="option"> Select...</option>
+                      </select>
+
+
+                    </div>
+                      <div class="form-group" style="margin-top: 20px">
+                        <label for="email">Price</label>
+                        <input type="integer" class="form-control"name="price" id="price" required>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap:10px; margin-top:10px">
+                      <label> Upload thumbnail </label>
+                      <input type="file" name="file" id="file" accept=".png" required>
+                    </div>
+
+
+
+                      <div class="py-4">
+                        <button type="submit" class="btn btn-primary btn-block py-2">Add Movie </button>
+                      </div>
+                  
+                  </form>
+                  <div id="formResponse" class="mt-3"></div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+      
+
+
+    </div>
+
+
+
+    <div class="dashboard-11">
+      <div class="main">
+        <div class="content">
+          <div class="center">
             <img
-              class="frame-icon1"
+              class="data-icon"
               loading="lazy"
               alt=""
-              src="./public/frame.svg"
+              src="{% static './public/frame.svg'%}"
             />
           </div>
-          <div class="navigation-sidebar-menu-li4">
-            <div class="frame-parent25">
-              <div class="frame-parent26">
-                <div class="hide-bg-copy-wrapper3">
-                  <div class="hide-bg-copy8"></div>
+          <div class="navigation-sidebar-menu-li2">
+            <div class="menu-items-container">
+              <div class="item-container-parent">
+                <div class="item-container">
+                  <div class="hide-bg-copy4"></div>
                 </div>
-                <div class="menu-itemstandard6">
-                  <div class="icon-group">
+
+
+              <a href="{% url 'home' %}" class="menu-item-link" style="text-decoration: none; color:#000"> 
+                <div class="menu-itemstandard3">
+                  <div class="menu-item-content">
                     <img
-                      class="icon12"
+                      class="icon8"
                       loading="lazy"
                       alt=""
-                      src="./public/icon11.svg"
-                    />
+                      src="{% static './public/icon11.svg' %}"/>
 
-                    <div class="menu-item-wrapper3">
-                      <a class="menu-item6">Dashboard</a>
+                    <div class="label">
+                      <b class="menu-item3">Dashboard</b>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+          <a href="{% url 'customers' %}" class="menu-item-link" style="text-decoration: none">
+              <div class="frame-parent11">
+                <div class="hide-bg-copy-wrapper1">
+                  <div class="hide-bg-copy6"></div>
+                </div>
+
+                <div class="menu-itemstandard5">
+                  <div class="iconlyregularlight3-user-group">
+                    <img
+                      class="iconlyregularlight3-user1"
+                      alt=""
+                      src="{% static './public/iconlyregularlight3-users.svg'%}"/>
+                    <div class="menu-item-wrapper1">
+                      <b class="menu-item4">Customers</b>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="frame-parent27" id="frameContainer1">
-                <div class="hide-bg-copy-wrapper4">
-                  <div class="hide-bg-copy9"></div>
+            </a>
+
+
+            <a href="{% url 'movies' %}" class="menu-item-link" style="text-decoration: none; color: #fff; font-weight: 500">
+              <div class="frame-parent11">
+                <div class="hide-bg-copy-wrapper1">
+                  <div class="hide-bg-copy5"></div>
                 </div>
-                <div class="menu-itemstandard7">
-                  <div class="iconlyregularlight3-user-container">
+                <div class="menu-itemstandard4">
+                  <div class="bx-movie-playsvg-group">
                     <img
-                      class="iconlyregularlight3-user2"
+                      class="bx-movie-playsvg-icon1"
                       alt=""
-                      src="./public/iconlyregularlight3-user2.svg"
+                      src="{% static './public/bxmovieplaysvgs.svg'%}"
                     />
 
-                    <div class="menu-item-wrapper4">
-                      <b class="menu-item7">Customers</b>
+                    <div class="menu-item-wrapper2">
+                      <b class="menu-item5">Movies</b>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="frame-parent28">
-                <div class="hide-bg-copy-wrapper5">
-                  <div class="hide-bg-copy10"></div>
-                </div>
-                <button class="menu-itemstandard8">
-                  <div class="bx-movie-playsvg-container">
-                    <img
-                      class="bx-movie-playsvg-icon2"
-                      alt=""
-                      src="./public/bxmovieplaysvg1.svg"
-                    />
-
-                    <div class="menu-item-wrapper5">
-                      <b class="menu-item8">Movies</b>
-                    </div>
-                  </div>
-                </button>
               </div>
             </div>
+          </a>
+
+
             <img
-              class="divider-icon6"
+              class="divider-icon3"
               loading="lazy"
               alt=""
-              src="./public/divider-2.svg"
+              src="{% static './public/divider-2.svg'%}"
             />
           </div>
         </div>
       </div>
-      <div class="navigation-sidebar-menu-li5">
-        <div class="side-bar-bg2"></div>
-        <div class="products68">
-          <div class="hide-bg34"></div>
-          <div class="products69">Logout</div>
-          <div class="div55"></div>
-        </div>
-        <div class="products70">
-          <div class="hide-bg35"></div>
-          <div class="products71">Settings</div>
-          <div class="div56"></div>
-        </div>
-        <img class="divider-icon7" alt="" src="./public/divider.svg" />
 
-        <div class="products72">
-          <div class="hide-bg36"></div>
-          <div class="products73">Table</div>
-          <div class="div57"></div>
+      
+      <div class="navigation-sidebar-menu-li3">
+        <div class="side-bar-bg1"></div>
+        <div class="products34">
+          <div class="hide-bg17"></div>
+          <div class="products35">Logout</div>
+          <div class="div19"></div>
         </div>
-        <div class="products74">
-          <div class="hide-bg37"></div>
-          <div class="products75">Profile</div>
-          <div class="div58"></div>
+        <div class="products36">
+          <div class="hide-bg18"></div>
+          <div class="products37">Settings</div>
+          <div class="div20"></div>
         </div>
-        <div class="products76">
-          <div class="hide-bg38"></div>
-          <div class="products77">UI Elements</div>
-          <div class="div59"></div>
-        </div>
-        <div class="products78">
-          <div class="hide-bg39"></div>
-          <div class="products79">Invoice</div>
-          <div class="div60"></div>
-        </div>
-        <div class="products80">
-          <div class="hide-bg40"></div>
-          <div class="products81">Contact</div>
-          <div class="div61"></div>
-        </div>
-        <div class="products82">
-          <div class="hide-bg41"></div>
-          <div class="products83">To-Do</div>
-          <div class="div62"></div>
-        </div>
-        <div class="products84">
-          <div class="hide-bg42"></div>
-          <div class="products85">Feed</div>
-          <div class="div63"></div>
-        </div>
-        <div class="products86">
-          <div class="hide-bg43"></div>
-          <div class="products87">Calendar</div>
-          <div class="div64"></div>
-        </div>
-        <div class="products88">
-          <div class="hide-bg44"></div>
-          <div class="products89">File Manager</div>
-          <div class="div65"></div>
-        </div>
-        <b class="pages2">PAGES</b>
-        <img class="divider-icon8" alt="" src="./public/divider-1.svg" />
+        <img class="divider-icon4" alt="" src="{% static './public/divider.svg'%}" />
 
-        <div class="products90">
-          <div class="hide-bg45"></div>
-          <div class="products91">E-commerce</div>
-          <div class="div66"></div>
-        </div>
-        <div class="products92">
-          <div class="hide-bg46"></div>
-          <div class="products93">Order Lists</div>
-          <div class="div67"></div>
-        </div>
-        <div class="products94">
-          <div class="hide-bg47"></div>
-          <div class="products95">Messenger</div>
-          <div class="div68"></div>
-        </div>
-        <div class="products96">
-          <div class="hide-bg48"></div>
-          <div class="products97">Favourites</div>
-          <div class="div69"></div>
-        </div>
-        <div class="products98">
-          <div class="hide-bg49"></div>
-          <div class="products99">Products</div>
-          <div class="div70"></div>
-        </div>
-        <div class="navigation-sidebar-item-li2">
-          <div class="products100">
-            <div class="hide-bg-hide-bg-copy-mask2">
-              <div class="mask2"></div>
-              <div class="hide-bg50"></div>
-              <div class="hide-bg-copy11"></div>
+        
+
+
+
+
+
+      
+        <div class="navigation-sidebar-item-li1">
+          <div class="products66">
+            <div class="hide-bg-hide-bg-copy-mask1">
+              <div class="mask1"></div>
+              <div class="hide-bg33"></div>
+              <div class="hide-bg-copy7"></div>
             </div>
-            <div class="products101">Dashboard</div>
-            <div class="div71"></div>
+            <div class="products67">Dashboard</div>
+            <div class="div35"></div>
           </div>
         </div>
-        <div class="logo2">
-          <div class="bg22"></div>
-          <div class="bright-web3">
+        <div class="logo1">
+          <div class="bg6"></div>
+          <div class="bright-web2">
             <span>Dash</span>
-            <span class="stack2">Stack</span>
+            <span class="stack1">Stack</span>
           </div>
         </div>
       </div>
-      <div class="data-table-parent">
-        <div class="data-table1">
-          <div class="tablebg1"></div>
-          <div class="data-table-inner">
-            <div class="frame-parent29">
-              <div class="frame-parent30">
-                <div class="movies-wrapper">
-                  <b class="movies">Movies</b>
+      <div class="table-container">
+        <div class="data-table">
+          <div class="tablebg"></div>
+          <div class="header1">
+            <div class="search-container">
+              <div class="search-input">
+                <div class="search-label">
+                  <b class="customers">Movies</b>
                 </div>
-                <button class="buttons-filled-no-icon-m1">
-                  <b class="add-movie">Add Movie</b>
+                <button class="buttons-filled-no-icon-m" id="add"  data-toggle="modal" data-target="#contactModal">
+                  <b class="add-customer">Add Movies</b>
                 </button>
               </div>
-              <div class="form-elements-inputfields1">
-                <div class="bg23"></div>
-                <div class="bg24"></div>
-                <input
-                  class="form-elements-inputfields-child"
-                  placeholder="Search"
-                  type="text"
-                />
+              <div class="form-elements-inputfields">
+                <div class="bg7"></div>
+                <div class="bg8"></div>
+                <input class="input-label" placeholder="Search" type="text" />
 
-                <div class="padding-10px-10px1">
-                  Padding 10px 10px 10px 14px
-                </div>
+                <div class="padding-10px-10px">Padding 10px 10px 10px 14px</div>
                 <img
-                  class="vuesaxlinearsearch-normal-icon1"
+                  class="vuesaxlinearsearch-normal-icon"
                   alt=""
-                  src="./public/vuesaxlinearsearchnormal.svg"
+                  src="{% static './public/vuesaxlinearsearchnormal.svg'%}"
                 />
               </div>
             </div>
           </div>
-          <div class="frame-parent31">
-            <div class="tbody-wrapper">
-              <footer class="tbody14">
-                <div class="tbody15">
-                  <div class="bg25"></div>
-                  <div class="frame-parent32">
-                    <div class="checkbox-parent">
-                      <input class="checkbox14" type="checkbox" />
 
-                      <div class="wrapper12">
-                        <div class="div72">1571</div>
-                      </div>
-                    </div>
-                    <div class="demo-customer-wrapper">
-                      <div class="demo-customer1">Demo Customer</div>
-                    </div>
-                    <div class="frame-wrapper9">
-                      <div class="parent4">
-                        <div class="div73">+77777777777</div>
-                        <a
-                          class="testgmailcom13"
-                          href="mailto:test@gmail.com"
-                          target="_blank"
-                          >test@gmail.com</a
-                        >
-                      </div>
-                    </div>
-                    <div class="frame-wrapper10">
-                      <div class="parent5">
-                        <div class="div74">23</div>
-                        <div class="male-wrapper10">
-                          <div class="male13">Male</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="lusaka-wrapper10">
-                      <div class="lusaka13">Lusaka</div>
-                    </div>
-                  </div>
-                  <img
-                    class="vuesaxlinearmore-icon13"
-                    loading="lazy"
-                    alt=""
-                    src="./public/vuesaxlinearmore.svg"
-                  />
-                </div>
-                <div class="tbody16">
-                  <div class="bg26"></div>
-                  <div class="frame-parent33">
-                    <div class="frame-parent34">
-                      <div class="checkbox-group">
-                        <input class="checkbox15" type="checkbox" />
 
-                        <div class="wrapper13">
-                          <div class="div75">1571</div>
-                        </div>
-                      </div>
-                      <div class="cosam-malaika-wrapper10">
-                        <div class="cosam-malaika12">Cosam Malaika</div>
-                      </div>
-                      <div class="frame-wrapper11">
-                        <div class="frame-parent35">
-                          <div class="wrapper14">
-                            <div class="div76">+111111111111111</div>
-                          </div>
-                          <div class="testgmailcom14">test@gmail.com</div>
-                        </div>
-                      </div>
-                      <div class="frame-wrapper12">
-                        <div class="parent6">
-                          <div class="div77">23</div>
-                          <div class="male-wrapper11">
-                            <div class="male14">Male</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <img
-                      class="vuesaxlinearmore-icon14"
-                      loading="lazy"
-                      alt=""
-                      src="./public/vuesaxlinearmore-1.svg"
-                    />
-                  </div>
-                  <div class="lusaka-wrapper11">
-                    <div class="lusaka14">Lusaka</div>
-                  </div>
-                </div>
-                <div class="tbody17">
-                  <div class="bg27"></div>
-                  <div class="frame-parent36">
-                    <div class="frame-parent37">
-                      <div class="checkbox-container">
-                        <input class="checkbox16" type="checkbox" />
 
-                        <div class="wrapper15">
-                          <div class="div78">1571</div>
-                        </div>
-                      </div>
-                      <div class="cosam-malaika-wrapper11">
-                        <div class="cosam-malaika13">Cosam Malaika</div>
-                      </div>
-                      <div class="frame-wrapper13">
-                        <div class="frame-parent38">
-                          <div class="wrapper16">
-                            <div class="div79">+111111111111111</div>
-                          </div>
-                          <div class="testgmailcom15">test@gmail.com</div>
-                        </div>
-                      </div>
-                      <div class="frame-wrapper14">
-                        <div class="parent7">
-                          <div class="div80">23</div>
-                          <div class="male-wrapper12">
-                            <div class="male15">Male</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <img
-                      class="vuesaxlinearmore-icon15"
-                      loading="lazy"
-                      alt=""
-                      src="./public/vuesaxlinearmore-1.svg"
-                    />
-                  </div>
-                  <div class="lusaka-wrapper12">
-                    <div class="lusaka15">Lusaka</div>
-                  </div>
-                </div>
-                <div class="tbody18">
-                  <div class="bg28"></div>
-                  <div class="frame-parent39">
-                    <div class="frame-parent40">
-                      <div class="checkbox-parent1">
-                        <input class="checkbox17" type="checkbox" />
 
-                        <div class="wrapper17">
-                          <div class="div81">1571</div>
-                        </div>
-                      </div>
-                      <div class="cosam-malaika-wrapper12">
-                        <div class="cosam-malaika14">Cosam Malaika</div>
-                      </div>
-                      <div class="frame-wrapper15">
-                        <div class="frame-parent41">
-                          <div class="wrapper18">
-                            <div class="div82">+111111111111111</div>
-                          </div>
-                          <div class="testgmailcom16">test@gmail.com</div>
-                        </div>
-                      </div>
-                      <div class="frame-wrapper16">
-                        <div class="parent8">
-                          <div class="div83">23</div>
-                          <div class="male-wrapper13">
-                            <div class="male16">Male</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <img
-                      class="vuesaxlinearmore-icon16"
-                      loading="lazy"
-                      alt=""
-                      src="./public/vuesaxlinearmore-1.svg"
-                    />
-                  </div>
-                  <div class="lusaka-wrapper13">
-                    <div class="lusaka16">Lusaka</div>
-                  </div>
-                </div>
-                <div class="tbody19">
-                  <div class="bg29"></div>
-                  <div class="frame-parent42">
-                    <div class="frame-parent43">
-                      <div class="checkbox-parent2">
-                        <input class="checkbox18" type="checkbox" />
 
-                        <div class="wrapper19">
-                          <div class="div84">1571</div>
-                        </div>
-                      </div>
-                      <div class="cosam-malaika-wrapper13">
-                        <div class="cosam-malaika15">Cosam Malaika</div>
-                      </div>
-                      <div class="frame-wrapper17">
-                        <div class="frame-parent44">
-                          <div class="wrapper20">
-                            <div class="div85">+111111111111111</div>
-                          </div>
-                          <div class="testgmailcom17">test@gmail.com</div>
-                        </div>
-                      </div>
-                      <div class="frame-wrapper18">
-                        <div class="parent9">
-                          <div class="div86">23</div>
-                          <div class="male-wrapper14">
-                            <div class="male17">Male</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <img
-                      class="vuesaxlinearmore-icon17"
-                      loading="lazy"
-                      alt=""
-                      src="./public/vuesaxlinearmore-1.svg"
-                    />
-                  </div>
-                  <div class="lusaka-wrapper14">
-                    <div class="lusaka17">Lusaka</div>
-                  </div>
-                </div>
-                <div class="tbody20">
-                  <div class="bg30"></div>
-                  <div class="frame-parent45">
-                    <div class="frame-parent46">
-                      <div class="checkbox-parent3">
-                        <input class="checkbox19" type="checkbox" />
 
-                        <div class="wrapper21">
-                          <div class="div87">1571</div>
-                        </div>
-                      </div>
-                      <div class="cosam-malaika-wrapper14">
-                        <div class="cosam-malaika16">Cosam Malaika</div>
-                      </div>
-                      <div class="frame-wrapper19">
-                        <div class="frame-parent47">
-                          <div class="wrapper22">
-                            <div class="div88">+111111111111111</div>
-                          </div>
-                          <div class="testgmailcom18">test@gmail.com</div>
-                        </div>
-                      </div>
-                      <div class="frame-wrapper20">
-                        <div class="parent10">
-                          <div class="div89">23</div>
-                          <div class="male-wrapper15">
-                            <div class="male18">Male</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <img
-                      class="vuesaxlinearmore-icon18"
-                      loading="lazy"
-                      alt=""
-                      src="./public/vuesaxlinearmore-1.svg"
-                    />
-                  </div>
-                  <div class="lusaka-wrapper15">
-                    <div class="lusaka18">Lusaka</div>
-                  </div>
-                </div>
-                <div class="tbody21">
-                  <div class="bg31"></div>
-                  <div class="frame-parent48">
-                    <div class="frame-parent49">
-                      <div class="checkbox-parent4">
-                        <input class="checkbox20" type="checkbox" />
 
-                        <div class="wrapper23">
-                          <div class="div90">1571</div>
-                        </div>
-                      </div>
-                      <div class="cosam-malaika-wrapper15">
-                        <div class="cosam-malaika17">Cosam Malaika</div>
-                      </div>
-                      <div class="frame-wrapper21">
-                        <div class="frame-parent50">
-                          <div class="wrapper24">
-                            <div class="div91">+111111111111111</div>
-                          </div>
-                          <div class="testgmailcom19">test@gmail.com</div>
-                        </div>
-                      </div>
-                      <div class="frame-wrapper22">
-                        <div class="parent11">
-                          <div class="div92">23</div>
-                          <div class="male-wrapper16">
-                            <div class="male19">Male</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <img
-                      class="vuesaxlinearmore-icon19"
-                      loading="lazy"
-                      alt=""
-                      src="./public/vuesaxlinearmore-1.svg"
-                    />
-                  </div>
-                  <div class="lusaka-wrapper16">
-                    <div class="lusaka19">Lusaka</div>
-                  </div>
-                </div>
-                <div class="tbody22">
-                  <div class="bg32"></div>
-                  <div class="frame-parent51">
-                    <div class="frame-parent52">
-                      <div class="checkbox-parent5">
-                        <input class="checkbox21" type="checkbox" />
 
-                        <div class="wrapper25">
-                          <div class="div93">1571</div>
-                        </div>
-                      </div>
-                      <div class="cosam-malaika-wrapper16">
-                        <div class="cosam-malaika18">Cosam Malaika</div>
-                      </div>
-                      <div class="frame-wrapper23">
-                        <div class="frame-parent53">
-                          <div class="wrapper26">
-                            <div class="div94">+111111111111111</div>
-                          </div>
-                          <div class="testgmailcom20">test@gmail.com</div>
-                        </div>
-                      </div>
-                      <div class="frame-wrapper24">
-                        <div class="parent12">
-                          <div class="div95">23</div>
-                          <div class="male-wrapper17">
-                            <div class="male20">Male</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <img
-                      class="vuesaxlinearmore-icon20"
-                      loading="lazy"
-                      alt=""
-                      src="./public/vuesaxlinearmore-1.svg"
-                    />
-                  </div>
-                  <div class="lusaka-wrapper17">
-                    <div class="lusaka20">Lusaka</div>
-                  </div>
-                </div>
-                <div class="tbody23">
-                  <div class="bg33"></div>
-                  <div class="frame-parent54">
-                    <div class="frame-parent55">
-                      <div class="checkbox-parent6">
-                        <input class="checkbox22" type="checkbox" />
 
-                        <div class="wrapper27">
-                          <div class="div96">1571</div>
-                        </div>
-                      </div>
-                      <div class="cosam-malaika-wrapper17">
-                        <div class="cosam-malaika19">Cosam Malaika</div>
-                      </div>
-                      <div class="frame-wrapper25">
-                        <div class="frame-parent56">
-                          <div class="wrapper28">
-                            <div class="div97">+111111111111111</div>
-                          </div>
-                          <div class="testgmailcom21">test@gmail.com</div>
-                        </div>
-                      </div>
-                      <div class="frame-wrapper26">
-                        <div class="parent13">
-                          <div class="div98">23</div>
-                          <div class="male-wrapper18">
-                            <div class="male21">Male</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <img
-                      class="vuesaxlinearmore-icon21"
-                      loading="lazy"
-                      alt=""
-                      src="./public/vuesaxlinearmore-1.svg"
-                    />
-                  </div>
-                  <div class="lusaka-wrapper18">
-                    <div class="lusaka21">Lusaka</div>
-                  </div>
-                </div>
-                <div class="tbody24">
-                  <div class="bg34"></div>
-                  <div class="frame-parent57">
-                    <div class="frame-parent58">
-                      <div class="checkbox-parent7">
-                        <input class="checkbox23" type="checkbox" />
 
-                        <div class="wrapper29">
-                          <div class="div99">1571</div>
-                        </div>
-                      </div>
-                      <div class="cosam-malaika-wrapper18">
-                        <div class="cosam-malaika20">Cosam Malaika</div>
-                      </div>
-                      <div class="frame-wrapper27">
-                        <div class="frame-parent59">
-                          <div class="wrapper30">
-                            <div class="div100">+111111111111111</div>
-                          </div>
-                          <div class="testgmailcom22">test@gmail.com</div>
-                        </div>
-                      </div>
-                      <div class="frame-wrapper28">
-                        <div class="parent14">
-                          <div class="div101">23</div>
-                          <div class="male-wrapper19">
-                            <div class="male22">Male</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <img
-                      class="vuesaxlinearmore-icon22"
-                      loading="lazy"
-                      alt=""
-                      src="./public/vuesaxlinearmore-1.svg"
-                    />
-                  </div>
-                  <div class="lusaka-wrapper19">
-                    <div class="lusaka22">Lusaka</div>
-                  </div>
-                </div>
-                <div class="tbody25">
-                  <div class="bg35"></div>
-                  <div class="frame-parent60">
-                    <div class="frame-parent61">
-                      <div class="checkbox-parent8">
-                        <input class="checkbox24" type="checkbox" />
 
-                        <div class="wrapper31">
-                          <div class="div102">1571</div>
-                        </div>
-                      </div>
-                      <div class="cosam-malaika-wrapper19">
-                        <div class="cosam-malaika21">Cosam Malaika</div>
-                      </div>
-                      <div class="frame-wrapper29">
-                        <div class="frame-parent62">
-                          <div class="wrapper32">
-                            <div class="div103">+111111111111111</div>
-                          </div>
-                          <div class="testgmailcom23">test@gmail.com</div>
-                        </div>
-                      </div>
-                      <div class="frame-wrapper30">
-                        <div class="parent15">
-                          <div class="div104">23</div>
-                          <div class="male-wrapper20">
-                            <div class="male23">Male</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <img
-                      class="vuesaxlinearmore-icon23"
-                      loading="lazy"
-                      alt=""
-                      src="./public/vuesaxlinearmore-1.svg"
-                    />
-                  </div>
-                  <div class="lusaka-wrapper20">
-                    <div class="lusaka23">Lusaka</div>
-                  </div>
-                </div>
-                <div class="tbody26">
-                  <div class="bg36"></div>
-                  <div class="frame-parent63">
-                    <div class="frame-parent64">
-                      <div class="checkbox-parent9">
-                        <div class="checkbox25"></div>
-                        <div class="wrapper33">
-                          <div class="div105">1571</div>
-                        </div>
-                      </div>
-                      <div class="cosam-malaika-wrapper20">
-                        <div class="cosam-malaika22">Cosam Malaika</div>
-                      </div>
-                      <div class="frame-wrapper31">
-                        <div class="frame-parent65">
-                          <div class="wrapper34">
-                            <div class="div106">+111111111111111</div>
-                          </div>
-                          <div class="testgmailcom24">test@gmail.com</div>
-                        </div>
-                      </div>
-                      <div class="frame-wrapper32">
-                        <div class="parent16">
-                          <div class="div107">23</div>
-                          <div class="male-wrapper21">
-                            <div class="male24">Male</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <img
-                      class="vuesaxlinearmore-icon24"
-                      alt=""
-                      src="./public/vuesaxlinearmore-1.svg"
-                    />
-                  </div>
-                  <div class="lusaka-wrapper21">
-                    <div class="lusaka24">Lusaka</div>
-                  </div>
-                </div>
-                <div class="tbody27">
-                  <div class="bg37"></div>
-                  <div class="frame-parent66">
-                    <div class="checkbox-parent10">
-                      <div class="checkbox26"></div>
-                      <div class="wrapper35">
-                        <div class="div108">1571</div>
-                      </div>
-                    </div>
-                    <div class="cosam-malaika-wrapper21">
-                      <div class="cosam-malaika23">Cosam Malaika</div>
-                    </div>
-                    <div class="frame-wrapper33">
-                      <div class="frame-parent67">
-                        <div class="wrapper36">
-                          <div class="div109">+111111111111111</div>
-                        </div>
-                        <div class="testgmailcom25">test@gmail.com</div>
-                      </div>
-                    </div>
-                    <div class="frame-wrapper34">
-                      <div class="parent17">
-                        <div class="div110">23</div>
-                        <div class="male-wrapper22">
-                          <div class="male25">Male</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="lusaka-wrapper22">
-                      <div class="lusaka25">Lusaka</div>
-                    </div>
-                  </div>
-                  <img
-                    class="vuesaxlinearmore-icon25"
-                    alt=""
-                    src="./public/vuesaxlinearmore-1.svg"
-                  />
-                </div>
-              </footer>
+
+
+
+          <!-- Table Content -->
+          <div class="body-container">
+            <div class="body3">
             </div>
-            <div class="thead1">
-              <div class="checkbox-parent11">
-                <input class="checkbox27" type="checkbox" />
 
-                <div class="id-wrapper">
-                  <div class="id1">ID</div>
-                </div>
-              </div>
-              <div class="frame-parent68">
-                <div class="name-wrapper">
-                  <div class="name3">Name</div>
-                </div>
-                <img
-                  class="vuesaxlinearsort-icon1"
-                  loading="lazy"
-                  alt=""
-                  src="./public/vuesaxlinearsort.svg"
-                />
-              </div>
-              <div class="contact-wrapper">
-                <div class="contact1">Contact</div>
-              </div>
-              <div class="email-wrapper">
-                <div class="email2">Email</div>
-              </div>
-              <div class="age-wrapper">
-                <div class="age1">Age</div>
-              </div>
-              <div class="gender-wrapper">
-                <div class="gender1">Gender</div>
-              </div>
-              <div class="city-wrapper">
-                <div class="city1">City</div>
-              </div>
-              <div class="actions-wrapper">
-                <div class="actions1">Actions</div>
-              </div>
+
+
+            
+            <!-- Table Header -->
+    <div class="thead">
+        <div class="id-header">
+            <input class="checkbox13" type="checkbox" />
+            <div class="id-label">
+                <div class="id">Movie ID</div>
             </div>
-          </div>
         </div>
-        <div class="main-bg-color-group">
-          <main class="main-bg-color2">
-            <section class="main-bg2"></section>
+        <div class="name-header" style="margin-left: -60px">
+            <div class="name-label">
+                <div class="name1">Movie Title</div>
+            </div>
+        </div>
+        <div class="header-cell" style="margin-left: -100px">
+            <div class="contact">Movie Type</div>
+        </div>
+        <div class="header-cell1">
+            <div class="email1">Price </div>
+        </div>
+
+        
+
+        <div class="header-cell1">
+          <div class="email1">Actions </div>
+      </div>
+        
+
+    </div>
+            <!-- Table head end-->
+
+
+            <!-- Table Rows  -->
+
+            <!-- Table Rows end  -->
+          </div>
+
+          <div class="tbody">
+            <div class="row">
+              <div class="id-header">
+                  <input class="checkbox13" type="checkbox" />
+                  <div class="id-label" style="margin-left: -160px">
+                      <div class="id">1</div>
+                  </div>
+              </div>
+              <div class="name-header" style="margin-left: -140px">
+                  <div class="name-label">
+                      <div class="name1">John</div>
+                  </div>
+              </div>
+
+              <div class="header-cell" style="margin-left: -40px">
+                  <div class="contact">Doe</div>
+              </div>
+
+              <div class="header-cell" style="margin-left: -60px">
+                <div class="contact">Doe</div>
+            </div>
+
+  
+
+
+              <div class="action-header">
+                  <div class="actions" style="margin-left:100px">
+                      <button class="btn btn-primary">Edit</button>
+                     <button class="btn btn-secondary">Delete</button>
+                  </div>
+
+                  
+              </div>
+          </div>
+
+
+
+          </div>
+
+
+
+
+          
+
+
+
+
+          
+        </div>
+
+
+        
+
+
+
+
+
+
+        
+
+<!-- Table header end -->
+
+
+
+
+
+        <div class="main-content">
+          <main class="main-bg-color1">
+            <section class="main-bg1"></section>
           </main>
-          <div class="nav2">
-            <div class="header3">
-              <div class="search2"></div>
-              <div class="text-wrapper1">
-                <div class="text4">
-                  <b class="title4">Hi, Aliyon!</b>
-                  <div class="body7">Let’s check your progress today</div>
+          <div class="nav1">
+            <div class="header2">
+              <div class="search1"></div>
+              <div class="header-content">
+                <div class="text2">
+                  <b class="title2">Hi, Aliyon!</b>
+                  <div class="body4">Let’s check your progress today</div>
                 </div>
               </div>
-              <div class="frame-parent69">
-                <div class="divider-container">
-                  <div class="divider2"></div>
+              <div class="profile-container">
+                <div class="profile-content">
+                  <div class="divider1"></div>
                 </div>
-                <div class="profile2">
-                  <div class="avatar6">
-                    <div class="avatar7">
-                      <div class="avatar8">
+                <div class="profile1">
+                  <div class="avatar3">
+                    <div class="avatar4">
+                      <div class="avatar5">
                         <img
-                          class="outline-border-icon2"
+                          class="outline-border-icon1"
                           alt=""
-                          src="./public/outline-border.svg"
+                          src="{% static './public/outline-border.svg'%}"
                         />
 
                         <img
-                          class="image-icon2"
+                          class="image-icon1"
                           alt=""
-                          src="./public/image@2x.png"
+                          src="{% static './public/image@2x.png'%}"
                         />
 
-                        <div class="initials4">
-                          <div class="background6"></div>
-                          <div class="initials5">AB</div>
+                        <div class="initials2">
+                          <div class="background3"></div>
+                          <div class="initials3">AB</div>
                         </div>
-                        <div class="icon13">
-                          <div class="background7"></div>
+                        <div class="icon9">
+                          <div class="background4"></div>
                           <img
-                            class="essentials-user-circle2"
+                            class="essentials-user-circle1"
                             loading="lazy"
                             alt=""
-                            src="./public/essentials--usercircle.svg"
+                            src="{% static './public/essentials--usercircle.svg'%}"
                           />
                         </div>
-                        <div class="add2">
-                          <div class="background8"></div>
+                        <div class="add1">
+                          <div class="background5"></div>
                           <img
-                            class="basics-add2"
+                            class="basics-add1"
                             alt=""
-                            src="./public/basics--add.svg"
+                            src="{% static './public/basics--add.svg'%}"
                           />
                         </div>
-                        <div class="counter-top2">
-                          <div class="large8">
-                            <div class="base12"></div>
-                            <div class="div111">23</div>
+                        <div class="counter-top1">
+                          <div class="large4">
+                            <div class="base6"></div>
+                            <div class="div53">23</div>
                           </div>
-                          <div class="medium8">
-                            <div class="base13"></div>
-                            <b class="b18">12</b>
+                          <div class="medium4">
+                            <div class="base7"></div>
+                            <b class="b14">12</b>
                           </div>
-                          <div class="small8">
-                            <div class="base14"></div>
-                            <b class="b19">17</b>
+                          <div class="small4">
+                            <div class="base8"></div>
+                            <b class="b15">17</b>
                           </div>
                         </div>
-                        <div class="counter-bottom2">
-                          <div class="large9">
-                            <div class="base15"></div>
-                            <div class="div112">23</div>
+                        <div class="counter-bottom1">
+                          <div class="large5">
+                            <div class="base9"></div>
+                            <div class="div54">23</div>
                           </div>
-                          <div class="medium9">
-                            <div class="base16"></div>
-                            <b class="b20">12</b>
+                          <div class="medium5">
+                            <div class="base10"></div>
+                            <b class="b16">12</b>
                           </div>
-                          <div class="small9">
-                            <div class="base17"></div>
-                            <b class="b21">17</b>
+                          <div class="small5">
+                            <div class="base11"></div>
+                            <b class="b17">17</b>
                           </div>
                         </div>
                         <img
-                          class="bottom-plus-icon2"
+                          class="bottom-plus-icon1"
                           alt=""
-                          src="./public/bottom-plus.svg"
+                          src="{% static './public/bottom-plus.svg'%}"
                         />
 
-                        <div class="indicator-bottom2">
-                          <div class="large10"></div>
-                          <div class="medium10"></div>
-                          <div class="small10"></div>
+                        <div class="indicator-bottom1">
+                          <div class="large6"></div>
+                          <div class="medium6"></div>
+                          <div class="small6"></div>
                         </div>
-                        <div class="indicator-top2">
-                          <div class="large11"></div>
-                          <div class="medium11"></div>
-                          <div class="small11"></div>
+                        <div class="indicator-top1">
+                          <div class="large7"></div>
+                          <div class="medium7"></div>
+                          <div class="small7"></div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="text-wrapper2">
-                    <div class="text5">
-                      <b class="title5">Aliyon Tembo</b>
-                      <div class="body8">Admin</div>
+                  <div class="text-frame">
+                    <div class="text3">
+                      <b class="title3">Aliyon Tembo</b>
+                      <div class="body5">Admin</div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="name4">
-                <img class="search-icon2" alt="" src="./public/search.svg" />
+              <div class="name2">
+                <img class="search-icon1" alt="" src="{% static './public/search.svg'%}" />
 
-                <div class="body9">Search...</div>
+                <div class="body6">Search...</div>
               </div>
-              <img class="icon14" alt="" src="./public/icon.svg" />
+              <img class="icon10" alt="" src="{% static './public/icon.svg'%}" />
 
-              <img class="icon15" alt="" src="./public/icon.svg" />
+              <img class="icon11" alt="" src="{% static './public/icon.svg'%}" />
             </div>
           </div>
           <img
-            class="separator-icon2"
+            class="separator-icon1"
             loading="lazy"
             alt=""
-            src="./public/separator.svg"
+            src="{% static './public/separator.sv'%}g"
           />
         </div>
       </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
     <script>
-      var frameContainer1 = document.getElementById("frameContainer1");
-      if (frameContainer1) {
-        frameContainer1.addEventListener("click", function (e) {
-          window.location.href = "./dashboard-1.html";
+      $(document).ready(function(){
+       // Load data into dropdown when modal is shown
+        $('#contactModal').on('show.bs.modal', function() {
+        console.log("Modal is being shown");
+        
+        $.ajax({
+            url: '{% url "get_genres" %}',
+            method: 'GET',
+            success: function(data) {
+                console.log('AJAX request successful');
+                console.log('Genres data:', data);
+                
+                var dropdown = $('#dataDropdown');
+                dropdown.empty();
+                
+                data.forEach(function(item) {
+                    console.log('Processing item:', item.genre);
+                    dropdown.append($('<option></option>').attr('value', item.genre).text(item.genre));
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX request failed');
+                console.error('Status:', status);
+                console.error('Error:', error);
+                alert('Failed to load data');
+            }
         });
-      }
+    });
+    
+
+      //submit contact form
+        $('#contactForm').on('submit', function(event){
+            event.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '{% url "add_movie" %}',
+                data: {
+                    'title': $('#title').val(),
+                    'type': $('#dataDropdown').val(),
+                    'price': $('#price').val(),
+                    'thumbnail': $('#file').val(),
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function(response){
+                    $('#formResponse').text(response.message);
+                    $('#contactForm')[0].reset();
+                },
+                error: function(response){
+                    $('#formResponse').text('An error occurred. Please try again.');
+                }
+            });
+        });
+    });
+
+
+      
       </script>
   </body>
 </html>
