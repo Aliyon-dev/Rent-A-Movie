@@ -3,34 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    {% comment %} /* <link rel="stylesheet" href="{% static 'css/styles.css' %}">  {% endcomment %}
+    <title>Table Structure</title>
+    <style>
+        .thead {
+            display: flex;
+            background-color: #f1f1f1;
+            padding: 10px;
+        }
+        .thead div {
+            flex: 1;
+            padding: 5px;
+        }
+        .id-header {
+            display: flex;
+            align-items: center;
+        }
+        .checkbox13 {
+            margin-right: 10px;
+        }
+        .id-label, .name-label, .header-cell, .header-cell1, .header-cell2, .header-cell3, .header-cell4, .action-header {
+            display: flex;
+            align-items: center;
+        }
+        .tbody {
+            display: flex;
+            flex-direction: column;
+        }
+        .tbody .row {
+            display: flex;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .tbody .row div {
+            flex: 1;
+            padding: 5px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to the Movie and Customer Management System</h1>
-        <nav>
-            <ul>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section>
-            <h2>About This System</h2>
-            <p>This system allows you to manage customers and movies easily. You can view lists of customers and movies, view details, and add new entries.</p>
-        </section>
-        <section>
-            <h2>Features</h2>
-            <ul>
-                <li>View and manage customers</li>
-                <li>View and manage movies</li>
-                <li>Add new customers and movies</li>
-                <li>Secure login system</li>
-            </ul>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 Movie and Customer Management System</p>
-    </footer>
+    <div class="thead">
+        <div class="id-header">
+            <input class="checkbox13" type="checkbox" />
+            <div class="id-label">
+                <div class="id">ID</div>
+            </div>
+        </div>
+        <div class="name-header">
+            <div class="name-label">
+                <div class="name1">First Name</div>
+            </div>
+        </div>
+        <div class="header-cell">
+            <div class="contact">Last Name</div>
+        </div>
+        <div class="header-cell1">
+            <div class="email1">Email</div>
+        </div>
+        <div class="header-cell2">
+            <div class="age">Contact</div>
+        </div>
+        <div class="header-cell3">
+            <div class="gender">State</div>
+        </div>
+        <div class="header-cell4">
+            <div class="city">City</div>
+        </div>
+        <div class="action-header">
+            <div class="actions">Actions</div>
+        </div>
+    </div>
+    <div class="tbody">
+        <div class="row">
+            <div class="id-header">
+                <input class="checkbox13" type="checkbox" />
+                <div class="id-label">
+                    <div class="id">1</div>
+                </div>
+            </div>
+            <div class="name-header">
+                <div class="name-label">
+                    <div class="name1">John</div>
+                </div>
+            </div>
+            <div class="header-cell">
+                <div class="contact">Doe</div>
+            </div>
+            <div class="header-cell1">
+                <div class="email1">john.doe@example.com</div>
+            </div>
+            <div class="header-cell2">
+                <div class="age">123-456-7890</div>
+            </div>
+            <div class="header-cell3">
+                <div class="gender">California</div>
+            </div>
+            <div class="header-cell4">
+                <div class="city">Los Angeles</div>
+            </div>
+            <div class="action-header">
+                <div class="actions">
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </div>
+            </div>
+        </div>
+        <!-- Add more rows as needed -->
+    </div>
 </body>
 </html>
