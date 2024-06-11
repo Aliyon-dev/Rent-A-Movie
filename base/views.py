@@ -6,9 +6,10 @@ from django.shortcuts import redirect
 from django.db import connection
 from .models import *
 from rest_framework.decorators import api_view
-from .serializers import genre_serializer
+from .serializers import genre_serializer, movie_serializer
 from django.http import JsonResponse
 from .models import Customer
+from rest_framework.response import Response
 
 # Create your views here.
 
@@ -46,44 +47,89 @@ def movies(request):
             """
         )
         rows = cursor.fetchall()
+        movie_list = {"movies": []}
+        
         for row in rows:
-            print(row)
+            movie = {
+                "id": row[0],
+                "title": row[1],
+                "type": row[2],
+                "price": row[3]
+            }
+            movie_list["movies"].append(movie)
+        #print(movie_list)
+    return render(request, 'movies.html', context=movie_list)
 
-    return render(request, 'movies.html')
 
+@api_view(['GET', 'DELETE', 'PUT'])
+def crud_movie(request, key):
+    
+    ### getting a specific movie ###
+    if request.method =='GET':
+        try:
+            movie = Movie.objects.get(pk=key)
+            print(movie)
+            serializer = movie_serializer(movie)
+            return Response(serializer.data)
+        except Exception as e:
+            print(e)
+            return JsonResponse({"error": "error"})
+        
+    ### deleting a movie ###     
+    elif request.method=='DELETE':
+        try:
+            movie = Movie.objects.get(pk=key)
+            movie.delete()
+            return JsonResponse({"message": f'Movie with title "{movie.title}" has been deleted successfully'})
+        except Exception as e:
+            error = str(e)
+            return JsonResponse({"error": error})
+        
+    ### editing a movie ###   
+    elif request.method == 'PUT':
+        try:
+            movie = Movie.objects.get(pk=key)
+            serializer = movie_serializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return JsonResponse({"message": "succesfully edited",})
+            else:
+                return JsonResponse({"message": "Unable to edit the movie"})       
+        except Exception as e:
+            return JsonResponse({"message": str(e)})
 
 def add_customer(request):
+
     if request.method == 'POST':
+        
         Fname = request.POST.get("Fname")
         Lname = request.POST.get("Lname")
         city = request.POST.get("city")
         state = request.POST.get("state")
         zip_code = request.POST.get("zipcode")
         phone_number = request.POST.get("phone")
-        email = request.POST.get("email")
 
-        #customer = Customer()
-        #customer.Fname = Fname
-        #customer.Lname = Lname
-        #customer.city = city
-        #customer.zip_code = int(zip_code)
-        #customer.phone = phone_number
-        #customer.state = state
-        #customer.save()
-        #customers = Customer.objects.all()
-        print(f'{Fname}, {Lname}, {city}, {state}, {zip_code}, {phone_number}, {email}')
+        customer = Customer()
+        customer.Fname = Fname
+        customer.Lname = Lname
+        customer.city = city
+        customer.zip_code = int(zip_code)
+        customer.phone = phone_number
+        customer.state = state
+        customer.save()
+        # customers = Customer.objects.all()
         with connection.cursor() as cursor:
            cursor.execute(
-               "INSERT INTO base_customer(Fname, Lname, city, state, zip_code, phone, email) VALUES (%s, %s, %s,%s, %s, %s,%s)",
-               [Fname,Lname,city,state, zip_code,phone_number,email ]
+               "INSERT INTO base_customer(id, Fname, Lname, city, state, zip_code, phone) VALUES (%s, %s, %s,%s, %s, %s,%s)",
+               [id, Fname, Lname,city, state, zip_code,phone_number ]
            )
-        return redirect('customers')
+        return redirect('customer')
+
         return render(request, 'add_customers.html',{'customers': customers})
+    
     customers = Customer.objects.all()
-    return render(request, 'add_customers.html',{'customers':customers})        
 
-
-
+    return render(request, 'add_customers.html',{'customrs':customers})        
 
 def get_customers(request):
     with connection.cursor() as cursor:
@@ -100,12 +146,12 @@ def add_movie(request):
         price = request.POST.get("price")
         url = request.POST.get("thumbnail")
         print(f"Received title: {title}, type: {type}, price: {price} img: {url}")
-        #with connection.cursor() as cursor:
-        #    cursor.execute(
-        #        "INSERT INTO base_movie (title, type, price) VALUES (%s, %s, %s)",
-        #        [title, type, price]
-        #    )
-        #return redirect('movies')
+        with connection.cursor() as cursor:
+            cursor.execute(
+                "INSERT INTO base_movie (title, type, price) VALUES (%s, %s, %s)",
+                [title, type, price]
+            )
+        return redirect('movies')
     return render(request, 'movies.html')
 
 

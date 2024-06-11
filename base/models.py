@@ -21,7 +21,7 @@ class Movie(models.Model):
     title = models.CharField(max_length=50)
     type = models.CharField(max_length=50)
     price = models.DecimalField(decimal_places=2, max_digits=10)
-    img_url = models.CharField(max_length=50)
+    #img_url = models.CharField(max_length=50)
     
     def __str__(self):
         return self.title
@@ -57,19 +57,14 @@ class Movie_rental(models.Model):
         unique_together = (('MovieID', 'RentalID'),)
     
 class Customer(models.Model):
-    id = models.AutoField(primary_key=True)
     Fname = models.CharField(max_length=50)
     Lname = models.CharField(max_length=50)
     city = models.CharField(max_length=30)
     phone =  models.IntegerField()
     zip_code = models.IntegerField()
-    #street_address = models.CharField(max_length=50)
+    street_address = models.CharField(max_length=50)
     state  = models.CharField(max_length=50)
-    email = models.CharField(max_length=50)
     
-    def __str__(self):
-        self.name = f'{self.Fname} {self.Lname}'   
-        return self.name 
     
     
 class Transaction(models.Model):

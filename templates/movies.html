@@ -304,44 +304,40 @@
             <!-- Table Rows end  -->
           </div>
 
+
+
+          {% for rows in movies %}
           <div class="tbody">
             <div class="row">
               <div class="id-header">
                   <input class="checkbox13" type="checkbox" />
-                  <div class="id-label" style="margin-left: -160px">
-                      <div class="id">1</div>
+                  <div class="id-label" style=" color: #000 left-align">
+                      <div class="id">{{ rows.id }}</div>
                   </div>
               </div>
-              <div class="name-header" style="margin-left: -140px">
+              <div class="name-header" style=" text-align:left background-color: #000">
                   <div class="name-label">
-                      <div class="name1">John</div>
+                      <div class="name1">{{ rows.title }}</div>
                   </div>
               </div>
 
-              <div class="header-cell" style="margin-left: -40px">
-                  <div class="contact">Doe</div>
+              <div class="header-cell" style="text-align:left">
+                  <div class="contact">{{ rows.type }}</div>
               </div>
 
-              <div class="header-cell" style="margin-left: -60px">
-                <div class="contact">Doe</div>
+              <div class="header-cell" style="text-align:left">
+                <div class="contact">{{ rows.price }}</div>
             </div>
-
-  
-
-
               <div class="action-header">
                   <div class="actions" style="margin-left:100px">
                       <button class="btn btn-primary">Edit</button>
                      <button class="btn btn-secondary">Delete</button>
                   </div>
-
-                  
               </div>
           </div>
-
-
-
-          </div>
+           
+</div>
+{% endfor %} 
 
 
 
@@ -550,7 +546,8 @@
                     'csrfmiddlewaretoken': '{{ csrf_token }}'
                 },
                 success: function(response){
-                    $('#formResponse').text(response.message);
+                    window.alert("Movie added successfuly");
+                    $('#formResponse').text('Movie successfuly added');
                     $('#contactForm')[0].reset();
                 },
                 error: function(response){
