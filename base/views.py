@@ -222,3 +222,58 @@ def get_genres(request):
         except Exception as e:
             print(e)
             return JsonResponse({"error": "error"})
+
+
+def get_customerDetails (request, customer_id):
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT* FROM base_customer WHERE id =%s", [customer_id])
+        customer =cursor.fetchone()
+
+    if customer is None:
+        return render(request, 'custome_detail.html', {'error': 'Customer not found'})
+    
+    return render(request, 'customer_detail.html',{'customer' : customer})
+
+
+def update_customer (request):
+    if request.method =='POST':
+        Fname = request.POST.get("Fname")
+        Lname = request.POST.get("Lname")
+        city = request.POST.get("city")
+        state = request.POST.get("state")
+        zip_code = request.POST.get("zipcode")
+        phone_number = request.POST.get("phone")
+
+
+        # #ensure zip code is a valid integer
+        # try:
+        #     zip_code =(int zip_code)
+        # except ValueError:
+        #     #Handle the error, maybe return an error message
+        #     return render (request, 'add customers.html', {'error':'Zip code must be a 5- digit number.'})
+        
+        with connection.cursor()as cursor:
+            cursor. excute (
+                "UPDATE base_customer SET Fname = %s, Lname = %s, city = %s, state = %s, zip_code = %s, phone_number = %s WHERE id = %s",
+                [Fname, Lname, city, state, zip_code, phone_number, id]
+
+            )
+        return redirect ('customer')
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT * FROM base_customer WHERE id = %s", [id])
+        customer = cursor.fetchone()
+
+    if customer is None:
+        return render (request, 'update_customer.html', {'erroe': 'Customer'})
+    return render(request, 'Update_customer.html', {'customer': customer})
+
+
+def delete_customer (request, customer_id):
+    with connection.cursor() as cursor:
+        cursor.excute ("DELETE FROM base_customer WHERE id=%s", [customer_id])
+
+    return redirect ('customer')    
+        
+
+
+    
