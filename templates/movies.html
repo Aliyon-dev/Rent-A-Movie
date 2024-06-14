@@ -188,7 +188,7 @@
 </script>
 
     <!-- Edit Movie Modal -->
-<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+<div class="modal fade" id="contactModalLabe" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
     <div class="modal-content"> 
         <div class="modal-header">
@@ -553,49 +553,20 @@
     <script>
       $(document).ready(function(){
         var table = $('#example').DataTable({
-           dom: 'rtip',
+          dom: 'rtip',
         });
 
         $('#custom-search').on('keyup', function() {
           table.search(this.value).draw();
       });
 
-
-
-
-
-
-        
-        function edit_movie(movieID){
+      function edit_movie(movieID){
           console.log(movieID);
         }
-       // Load data into dropdown when modal is shown
-        $('#contactModal').on('show.bs.modal', function() {
-        console.log("Modal is being shown");
+
         
-        $.ajax({
-            url: '{% url "get_genres" %}',
-            method: 'GET',
-            success: function(data) {
-                console.log('AJAX request successful');
-                console.log('Genres data:', data);
-                
-                var dropdown = $('#dataDropdown');
-                dropdown.empty();
-                
-                data.forEach(function(item) {
-                    console.log('Processing item:', item.genre);
-                    dropdown.append($('<option></option>').attr('value', item.genre).text(item.genre));
-                });
-            },
-            error: function(xhr, status, error) {
-                console.error('AJAX request failed');
-                console.error('Status:', status);
-                console.error('Error:', error);
-                alert('Failed to load data');
-            }
-        });
-    });
+       // Load data into dropdown when modal is shown
+        
 
 
 
@@ -639,7 +610,7 @@
 
 
 
-    /*
+    
     // Load data into dropdown when modal is shown
     $('#edit').on('show.bs.modal', function() {
       console.log("Modal is being shown");
@@ -669,7 +640,7 @@
       
   });
 
-  */
+  
 
 
 
@@ -712,6 +683,35 @@
       </script>
 
       <script>
+        $(document).ready(function(){
+          console.log("fuck")
+          $('#contactModal').on('show.bs.modal', function() {
+            console.log("Modal is being shown");
+            
+            $.ajax({
+                url: '{% url "get_genres" %}',
+                method: 'GET',
+                success: function(data) {
+                    console.log('AJAX request successful');
+                    console.log('Genres data:', data);
+                    
+                    var dropdown = $('#dataDropdown');
+                    dropdown.empty();
+                    
+                    data.forEach(function(item) {
+                        console.log('Processing item:', item.genre);
+                        dropdown.append($('<option></option>').attr('value', item.genre).text(item.genre));
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX request failed');
+                    console.error('Status:', status);
+                    console.error('Error:', error);
+                    alert('Failed to load data');
+                }
+            });
+        });
+        })
 
       </script>  
   </body>

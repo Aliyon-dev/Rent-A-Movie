@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import delete_customer, get_customerDetails, *, update_customer
+from .views import *
 
 urlpatterns = [
     path('', home, name="home"),
@@ -12,11 +12,7 @@ urlpatterns = [
     path('get-movie', get_movies, name="get_movies"),
     path('get-movie/<int:key>', get_movie, name="get-movie"),
     path('update-movie/<int:key>', update_movie, name="update-movie"),
-    path('delete-movie/<int:key>', delete_movie, name="delete-movie")
-    
-    path('get-movie/<int:key>', crud_movie, name="get-movie"),
-    path('get-movie/<str:key>', crud_movie, name="get-movie"),
-    path('modal', test),
+    path('delete-movie/<int:key>', delete_movie, name="delete-movie"),
     path('customer/<int:customer_id>/', get_customerDetails, name='customer_detail'), 
     path('customer/<int:customer_id>/update/', update_customer, name='update_customer'),
     path('customer/<int:customer_id>/delete/', delete_customer, name='delete_customer'),
