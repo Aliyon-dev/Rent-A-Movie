@@ -37,32 +37,72 @@ def login(request):
 def customers(request):
     return render(request, 'customers.html')
 
-
 def movies(request):
-    context_dict = {}
-    with connection.cursor() as cursor:
-        cursor.execute(
-            """     SELECT id, title, type, price
-                    FROM base_movie
-            """
-        )
-        rows = cursor.fetchall()
-        movie_list = {"movies": []}
-        
-        for row in rows:
-            movie = {
-                "id": row[0],
-                "title": row[1],
-                "type": row[2],
-                "price": row[3]
-            }
-            movie_list["movies"].append(movie)
-        #print(movie_list)
-    return render(request, 'movies.html', context=movie_list)
+    return render(request, 'movies.html')
+
+@api_view(['GET'])
+def get_movies(request):
+    if request.method == 'GET':
+        try:
+            movies = Movie.objects.all()
+            serializer = movie_serializer(movies, many=True)
+            return JsonResponse(serializer.data, safe=False)
+        except Exception as error:
+            return JsonResponse({"Message": str(error)})
+    #context_dict = {}
+    #with connection.cursor() as cursor:
+    #    cursor.execute(
+    #        """     SELECT id, title, type, price
+    #                FROM base_movie
+    #        """
+    #    )
+    #    rows = cursor.fetchall()
+    #    movie_list = {"movies": []}
+    #    
+    #    for row in rows:
+    #        movie = {
+    #            "id": row[0],
+    #            "title": row[1],
+    #            "type": row[2],
+    #            "price": row[3]
+    #        }
+    #        movie_list["movies"].append(movie)
+    #    #print(movie_list)
+    return render(request, 'movies.html')
+
+@api_view(['PUT'])
+def update_movie(request, key):
+    try:
+        if request.method == 'PUT':
+            movie = Movie.objects.get(pk=key)
+            serializer = movie_serializer(instance=movie, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return JsonResponse({"Successfully updated": serializer.data})
+            else:
+                return JsonResponse({"message": "unable to update movie"})
+
+    except Exception as error:
+        return JsonResponse({"Message": str(error)})
 
 
-@api_view(['GET', 'DELETE', 'PUT'])
-def crud_movie(request, key):
+
+@api_view(['DELETE'])
+def delete_movie(request, key):
+    try:
+        if request.method == 'DELETE':
+            movie = Movie.objects.get(pk=key)
+            movie.delete()
+            return JsonResponse({"Message":"Movie has deleted successfully"})
+        else:
+            return JsonResponse({"Wrong Method, expected 'DELETE' "})
+    except Exception as error:
+        return JsonResponse({"Message": str(error)})
+            
+    
+
+@api_view(['GET'])
+def get_movie(request, key):
     
     ### getting a specific movie ###
     if request.method =='GET':
@@ -98,8 +138,32 @@ def crud_movie(request, key):
         except Exception as e:
             return JsonResponse({"message": str(e)})
 
-def add_customer(request):
 
+def add_movie(request):
+    if request.method == 'POST':
+        title = request.POST.get("title")
+        type = request.POST.get("type")
+        price = request.POST.get("price")
+        url = request.POST.get("thumbnail")
+        print(f"Received title: {title}, type: {type}, price: {price} img: {url}")
+        with connection.cursor() as cursor:
+            cursor.execute(
+                "INSERT INTO base_movie (title, genre, price) VALUES (%s, %s, %s)",
+                [title, type, price]
+            )
+        return redirect('movies')
+    return render(request, 'movies.html')
+
+
+
+
+
+
+
+
+
+
+def add_customer(request):
     if request.method == 'POST':
         
         Fname = request.POST.get("Fname")
@@ -139,20 +203,8 @@ def get_customers(request):
     return render(request, 'add_customers.html', {'customers': customers})
 
 
-def add_movie(request):
-    if request.method == 'POST':
-        title = request.POST.get("title")
-        type = request.POST.get("type")
-        price = request.POST.get("price")
-        url = request.POST.get("thumbnail")
-        print(f"Received title: {title}, type: {type}, price: {price} img: {url}")
-        with connection.cursor() as cursor:
-            cursor.execute(
-                "INSERT INTO base_movie (title, type, price) VALUES (%s, %s, %s)",
-                [title, type, price]
-            )
-        return redirect('movies')
-    return render(request, 'movies.html')
+
+
 
 
 def test(request):

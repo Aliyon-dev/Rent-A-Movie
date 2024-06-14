@@ -19,7 +19,7 @@ class Genre(models.Model):
 class Movie(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=50)
-    type = models.CharField(max_length=50)
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
     price = models.DecimalField(decimal_places=2, max_digits=10)
     #img_url = models.CharField(max_length=50)
     
