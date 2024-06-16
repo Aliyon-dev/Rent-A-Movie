@@ -11,6 +11,7 @@ admin.site.register(Rental)
 admin.site.register(Customer)
 admin.site.register(Transaction)
 admin.site.register(Customer_Transaction)
-admin.site.register(Movie_genre)
+#admin.site.register(Movie_genre)
 admin.site.register(Genre)
+admin.site.register(ZipCode)
 

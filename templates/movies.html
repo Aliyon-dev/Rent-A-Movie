@@ -7,8 +7,6 @@
     <meta name="viewport" content="initial-scale=1, width=device-width" />
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Z1/T0Kdozrg1LxGKfHplVVz2ZjC3c6BPk43TWmK9Pr3mV3s4XzUdL4rV6HRw9s49zyYh25zyqJ/PLmgq7kq/uw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Z1/T0Kdozrg1LxGKfHplVVz2ZjC3c6BPk43TWmK9Pr3mV3s4XzUdL4rV6HRw9s49zyYh25zyqJ/PLmgq7kq/uw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{% static 'css/movies.css' %}" />
     <link rel="stylesheet" href="{% static 'css/tables.css' %}" />
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -53,6 +51,7 @@
               </div>
               <div class="modal-body">
                   <form id="contactForm" method="post">
+                    {% csrf_token %}
 
                       <div class="form-group">
                           <label for="name"> Movie Title </label>
@@ -73,8 +72,9 @@
                     </div>
 
                     <div style="display: flex; flex-direction: column; gap:10px; margin-top:10px">
-                      <label> Upload thumbnail </label>
-                      <input type="file" name="file" id="file" accept=".png" required>
+                      <label> Language </label>
+                      <input type="text" class="form-control" id="language" name="language" required>
+                      
                     </div>
 
 
@@ -375,24 +375,13 @@
                       <th>Title</th>
                       <th>Genre</th>
                       <th>Price</th>
+                      <th>Language</th>
+    
                       
                   </tr>
               </thead>
               <tbody>
-                  <tr>
-                      <td>Tiger Nixon</td>
-                      <td>System Architect</td>
-                      <td>Edinburgh</td>
-                      <td>61</td>
-        
-                  </tr>
-                  <tr>
-                      <td>Garrett Winters</td>
-                      <td>Accountant</td>
-                      <td>Tokyo</td>
-                      <td>63</td>
-        
-                  </tr>
+
                   <!-- Add more rows as needed -->
               </tbody>
           </table>
@@ -538,19 +527,26 @@
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+    <!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <script>
+<!-- Popper.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+<!-- DataTables -->
+<script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+<!-- DataTables Buttons (optional) -->
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+
+
+<script>
       $(document).ready(function(){
         var table = $('#example').DataTable({
           dom: 'rtip',
@@ -560,9 +556,6 @@
           table.search(this.value).draw();
       });
 
-      function edit_movie(movieID){
-          console.log(movieID);
-        }
 
         
        // Load data into dropdown when modal is shown
@@ -570,11 +563,10 @@
 
 
 
-
-
+////////////// DRAW TABLE WITH BACKEND DATABASE ///////////////////
 
     // function to populate the table with database content
-    function populateDataTable(data) {
+  function populateDataTable(data) {
       table.clear();
       // Add rows from API data
       data.forEach(item => {
@@ -583,12 +575,11 @@
               item.title,
               item.genre,
               item.price,
+              item.language,
+
           ]).draw(false); // Draw added row without redrawing entire table
       });
   }
-
-
-
 
     /* Making API calls to get movies from the backend */
     $.ajax({
@@ -604,13 +595,15 @@
       }
   });
 
+  ////////////////// TABLE END //////////////////////////
 
 
 
 
 
 
-    
+  ////////////////////// EDITING A MOVIE ENTITY ////////////////////
+
     // Load data into dropdown when modal is shown
     $('#edit').on('show.bs.modal', function() {
       console.log("Modal is being shown");
@@ -640,51 +633,18 @@
       
   });
 
-  
 
-
-
-
-
-
-
-
-
-
-    
-
-      //submit contact form
-        $('#contactForm').on('submit', function(event){
-            event.preventDefault();
-            $.ajax({
-                type: 'POST',
-                url: '{% url "add_movie" %}',
-                data: {
-                    'title': $('#title').val(),
-                    'type': $('#dataDropdown').val(),
-                    'price': $('#price').val(),
-                    'thumbnail': $('#file').val(),
-                    'csrfmiddlewaretoken': '{{ csrf_token }}'
-                },
-                success: function(response){
-                    window.alert("Movie added successfuly");
-                    $('#formResponse').text('Movie successfuly added');
-                    $('#contactForm')[0].reset();
-                },
-                error: function(response){
-                    $('#formResponse').text('An error occurred. Please try again.');
-                }
-            });
-        });
     });
 
+////////////////////// MOVIE EDIT END ///////////////////////////
+</script>
 
-      
-      </script>
+<script>
 
-      <script>
+
+
+  /////////////////////// ADD MOVIE TO THE BACKEND //////////////////////
         $(document).ready(function(){
-          console.log("fuck")
           $('#contactModal').on('show.bs.modal', function() {
             console.log("Modal is being shown");
             
@@ -711,6 +671,35 @@
                 }
             });
         });
+
+      //submit form 
+      $('#contactForm').on('submit', function(event){
+        //event.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '{% url "add_movie" %}',
+            data: {
+                'title': $('#title').val(),
+                'genre': $('#dataDropdown').val(),
+                'price': $('#price').val(),
+                'language': $('#language').val(),
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function(response){
+                $('#formResponse').text('Movie successfuly added');
+                $('#contactForm')[0].reset();
+            },
+            error: function(response){
+                $('#formResponse').text('An error occurred. Please try again.');
+            }
+        });
+    });
+
+
+    ////////////// ADD MOVIE END //////////////////////////////
+
+
+
         })
 
       </script>  

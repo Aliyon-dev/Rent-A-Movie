@@ -6,10 +6,11 @@ from django.shortcuts import redirect
 from django.db import connection
 from .models import *
 from rest_framework.decorators import api_view
-from .serializers import genre_serializer, movie_serializer
+from .serializers import genre_serializer, movie_serializer, customer_serializers, zipcode_serializers
 from django.http import JsonResponse
 from .models import Customer
 from rest_framework.response import Response
+from rest_framework import status
 
 # Create your views here.
 
@@ -39,6 +40,9 @@ def customers(request):
 
 def movies(request):
     return render(request, 'movies.html')
+
+
+
 
 @api_view(['GET'])
 def get_movies(request):
@@ -101,9 +105,8 @@ def delete_movie(request, key):
             
     
 
-@api_view(['GET'])
+#@api_view(['GET'])
 def get_movie(request, key):
-    
     ### getting a specific movie ###
     if request.method =='GET':
         try:
@@ -114,94 +117,73 @@ def get_movie(request, key):
         except Exception as e:
             print(e)
             return JsonResponse({"error": "error"})
-        
-    ### deleting a movie ###     
-    elif request.method=='DELETE':
-        try:
-            movie = Movie.objects.get(pk=key)
-            movie.delete()
-            return JsonResponse({"message": f'Movie with title "{movie.title}" has been deleted successfully'})
-        except Exception as e:
-            error = str(e)
-            return JsonResponse({"error": error})
-        
-    ### editing a movie ###   
-    elif request.method == 'PUT':
-        try:
-            movie = Movie.objects.get(pk=key)
-            serializer = movie_serializer(data=request.data)
-            if serializer.is_valid():
-                serializer.save()
-                return JsonResponse({"message": "succesfully edited",})
-            else:
-                return JsonResponse({"message": "Unable to edit the movie"})       
-        except Exception as e:
-            return JsonResponse({"message": str(e)})
-
-
-def add_movie(request):
-    if request.method == 'POST':
-        title = request.POST.get("title")
-        type = request.POST.get("type")
-        price = request.POST.get("price")
-        url = request.POST.get("thumbnail")
-        print(f"Received title: {title}, type: {type}, price: {price} img: {url}")
-        with connection.cursor() as cursor:
-            cursor.execute(
-                "INSERT INTO base_movie (title, genre, price) VALUES (%s, %s, %s)",
-                [title, type, price]
-            )
-        return redirect('movies')
     return render(request, 'movies.html')
 
 
+@api_view(['POST'])
+def add_movie(request):
+    if request.method == 'POST':
+        title = request.POST.get("title")
+        type = request.POST.get("genre")
+        price = request.POST.get("price")
+        language = request.POST.get("language")
+        try:
+            movie =  Movie.objects.create(
+            title=title,
+            genre = Genre.objects.get(genre=type),
+            language=language,
+            price = price
+            )
+            return JsonResponse({"message": f'{title} added successfully'})
+        
+        except Exception as error:
+            return JsonResponse({"error": str(error)})
 
-
-
-
-
-
-
-
+@api_view(['POST'])
 def add_customer(request):
     if request.method == 'POST':
-        
-        Fname = request.POST.get("Fname")
-        Lname = request.POST.get("Lname")
+        Fname = request.POST.get("fname")
+        Lname = request.POST.get("lname")
         city = request.POST.get("city")
-        state = request.POST.get("state")
+        email = request.POST.get("email")
         zip_code = request.POST.get("zipcode")
         phone_number = request.POST.get("phone")
+        
+        #print(f'{Fname} {Lname} {city} {email} {zip_code} {phone_number}')
+        
+        customer = Customer.objects.create(
+            Fname=Fname,
+            Lname=Lname,
+            city=city,
+            phone=phone_number,
+            zip_code=zip_code,
+            email=email 
+        )
+        
+        return JsonResponse({"success": Fname})
+        
+        
+        #with connection.cursor() as cursor:
+        #   cursor.execute(
+        #       "INSERT INTO base_customer(id, Fname, Lname, city, state, zip_code, phone) VALUES (%s, %s, %s,%s, %s, %s,%s)",
+        #       [id, Fname, Lname,city, state, zip_code,phone_number ]
+        #   )
+        #return redirect('customer')
 
-        customer = Customer()
-        customer.Fname = Fname
-        customer.Lname = Lname
-        customer.city = city
-        customer.zip_code = int(zip_code)
-        customer.phone = phone_number
-        customer.state = state
-        customer.save()
-        # customers = Customer.objects.all()
-        with connection.cursor() as cursor:
-           cursor.execute(
-               "INSERT INTO base_customer(id, Fname, Lname, city, state, zip_code, phone) VALUES (%s, %s, %s,%s, %s, %s,%s)",
-               [id, Fname, Lname,city, state, zip_code,phone_number ]
-           )
-        return redirect('customer')
 
-        return render(request, 'add_customers.html',{'customers': customers})
-    
-    customers = Customer.objects.all()
-
-    return render(request, 'add_customers.html',{'customrs':customers})        
-
+@api_view(['GET'])
 def get_customers(request):
-    with connection.cursor() as cursor:
-        cursor.execute("SELECT * FROM base_customer LIMIT 200")
-        customers = cursor.fetchall()
-
-    return render(request, 'add_customers.html', {'customers': customers})
-
+    try:
+        if request.method == 'GET':
+           # with connection.cursor() as cursor:
+           #     cursor.execute("SELECT * FROM base_customer LIMIT 200")
+           #     
+           # customers = cursor.fetchall()
+           movie = Customer.objects.all()
+           serializer = customer_serializers(movie, many=True)
+           return JsonResponse(serializer.data, safe=False)
+    except Exception as e:
+        return JsonResponse({"Error": str(e)})
 
 
 
@@ -253,7 +235,7 @@ def update_customer (request):
         #     return render (request, 'add customers.html', {'error':'Zip code must be a 5- digit number.'})
         
         with connection.cursor()as cursor:
-            cursor. excute (
+            cursor. execute (
                 "UPDATE base_customer SET Fname = %s, Lname = %s, city = %s, state = %s, zip_code = %s, phone_number = %s WHERE id = %s",
                 [Fname, Lname, city, state, zip_code, phone_number, id]
 
@@ -270,10 +252,22 @@ def update_customer (request):
 
 def delete_customer (request, customer_id):
     with connection.cursor() as cursor:
-        cursor.excute ("DELETE FROM base_customer WHERE id=%s", [customer_id])
+        cursor.execute ("DELETE FROM base_customer WHERE id=%s", [customer_id])
 
     return redirect ('customer')    
         
 
 
+
+@api_view(['GET'])
+def get_city(request, key):
+    if request.method=='GET':
+        try:
+            city = ZipCode.objects.get(pk=str(key))
+            serializer = zipcode_serializers(city)
+            return JsonResponse(serializer.data, safe=False)
+        except Exception as e:
+            return JsonResponse({"error": "invalid zipcode"}, status=status.HTTP_404_NOT_FOUND)
+
+        
     
