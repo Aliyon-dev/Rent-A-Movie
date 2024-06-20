@@ -736,9 +736,6 @@
   background-color: #fff;
 }
 .total-users {
-  position: absolute;
-  top: 188px;
-  left: 26px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -833,9 +830,6 @@
   background-color: #fff;
 }
 .total-order {
-  position: absolute;
-  top: 188px;
-  left: 318px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -929,9 +923,6 @@
   background-color: #fff;
 }
 .total-sales {
-  position: absolute;
-  top: 188px;
-  left: 610px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -978,9 +969,6 @@
   z-index: 1;
 }
 .order-pending {
-  position: absolute;
-  top: 188px;
-  left: 902px;
   box-shadow: 6px 6px 54px rgba(0, 0, 0, 0.05);
   border-radius: 14px;
   background-color: #fff;
@@ -1388,10 +1376,9 @@
   font-size: 12px;
   color: rgba(43, 48, 52, 0.4);
 }
-.sales-details {
-  position: absolute;
-  top: 369px;
-  left: 26px;
+.chart {
+  margin-left: 26px;
+  margin-top: 26px;
   box-shadow: 6px 6px 54px rgba(0, 0, 0, 0.05);
   border-radius: 14px;
   background-color: #fff;

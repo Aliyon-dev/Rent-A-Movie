@@ -1,113 +1,244 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Table Structure</title>
-    <style>
-        .thead {
-            display: flex;
-            background-color: #f1f1f1;
-            padding: 10px;
-        }
-        .thead div {
-            flex: 1;
-            padding: 5px;
-        }
-        .id-header {
-            display: flex;
-            align-items: center;
-        }
-        .checkbox13 {
-            margin-right: 10px;
-        }
-        .id-label, .name-label, .header-cell, .header-cell1, .header-cell2, .header-cell3, .header-cell4, .action-header {
-            display: flex;
-            align-items: center;
-        }
-        .tbody {
-            display: flex;
-            flex-direction: column;
-        }
-        .tbody .row {
-            display: flex;
-            padding: 10px;
-            border-bottom: 1px solid #ccc;
-        }
-        .tbody .row div {
-            flex: 1;
-            padding: 5px;
-        }
-    </style>
-</head>
-<body>
-    <div class="thead">
-        <div class="id-header">
-            <input class="checkbox13" type="checkbox" />
-            <div class="id-label">
-                <div class="id">ID</div>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href=".{% static 'css/index.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito Sans:wght@600;700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Signika:wght@500&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open Sans:wght@600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+    />
+  </head>
+  <body>
+    <div class="dashboard-1">
+      <div class="main-bg-color-parent">
+        <main class="main-bg-color">
+          <section class="main-bg"></section>
+        </main>
+        <header class="nav">
+          <div class="header">
+            <div class="text-wrapper">
+              <div class="text">
+                <b class="title">Hi, Aliyon!</b>
+                <div class="body">Let’s check your progress today</div>
+              </div>
             </div>
-        </div>
-        <div class="name-header">
-            <div class="name-label">
-                <div class="name1">First Name</div>
+            <div class="search-wrapper">
+              <div class="search">
+                <div class="name">
+                  <img class="search-icon" alt="" src="{% static './public/search.svg'%}" />
+
+                  <input class="body1" placeholder="Search..." type="text" />
+                </div>
+              </div>
             </div>
-        </div>
-        <div class="header-cell">
-            <div class="contact">Last Name</div>
-        </div>
-        <div class="header-cell1">
-            <div class="email1">Email</div>
-        </div>
-        <div class="header-cell2">
-            <div class="age">Contact</div>
-        </div>
-        <div class="header-cell3">
-            <div class="gender">State</div>
-        </div>
-        <div class="header-cell4">
-            <div class="city">City</div>
-        </div>
-        <div class="action-header">
-            <div class="actions">Actions</div>
-        </div>
+            <div class="header-inner">
+              <div class="frame-parent">
+                <div class="divider-wrapper">
+                  <div class="divider"></div>
+                </div>
+                <div class="profile">
+                  <div class="avatar">
+                    <div class="avatar1">
+                      <div class="avatar2">
+                        <img
+                          class="outline-border-icon"
+                          alt=""
+                          src="{% static './public/outline-border.svg' %}"
+                        />
+
+                        <img
+                          class="image-icon"
+                          alt=""
+                          src="{% static './public/image@2x.png'%}"
+                        />
+
+                        <div class="initials">
+                          <div class="background"></div>
+                          <div class="initials1">AB</div>
+                        </div>
+                        <div class="icon">
+                          <div class="background1"></div>
+                          <img
+                            class="essentials-user-circle"
+                            loading="lazy"
+                            alt=""
+                            src="{% static './public/essentials--usercircle.svg'%}"
+                          />
+                        </div>
+                        <div class="add">
+                          <div class="background2"></div>
+                          <img
+                            class="basics-add"
+                            alt=""
+                            src="{% static './public/basics--add.svg'%}"
+                          />
+                        </div>
+                      
+                        <img
+                          class="bottom-plus-icon"
+                          alt=""
+                          src="{% static './public/bottom-plus.svg'%}"
+                        />
+
+                        <div class="indicator-bottom">
+                          <div class="large2"></div>
+                          <div class="medium2"></div>
+                          <div class="small2"></div>
+                        </div>
+                        <div class="indicator-top">
+                          <div class="large3"></div>
+                          <div class="medium3"></div>
+                          <div class="small3"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text-container">
+                    <div class="text1">
+                      <b class="title1">Aliyon Tembo</b>
+                      <div class="body2">Admin</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <img class="icon1" alt="" src="{% static './public/icon.svg'%}" />
+
+            <img class="icon2" alt="" src="{% static './public/icon.svg'%}" />
+          </div>
+        </header>
+        <img
+          class="separator-icon"
+          loading="lazy"
+          alt=""
+          src="{% static './public/separator.svg'%}"
+        />
+
+
+        {% block content %}
+
+
+        {% endblock %}
+
+
+
+   
+      </div>
+      
+
+
+
+
+      <!--Side Bar -->
+      <div class="navigation-sidebar-menu-li1">
+        <div class="side-bar">
+          <div class="frame-parent5">
+            <div class="hide-bg-copy-wrapper">
+              <div class="hide-bg-copy1"></div>
+            </div>
+
+          <a href="{% url 'home' %}" class="menu-item-link" style="text-decoration: none">
+            <div class="menu-itemstandard">
+              <div class="icon-parent">
+                <img class="icon7" alt="" src="{% static './public/icon-4.svg'%}" />
+
+                <div class="menu-item-wrapper">
+                  <b class="menu-item">Dashboard</b>
+                </div>
+              </div>
+            </div>
+        </a>
     </div>
-    <div class="tbody">
-        <div class="row">
-            <div class="id-header">
-                <input class="checkbox13" type="checkbox" />
-                <div class="id-label">
-                    <div class="id">1</div>
+          <div class="frame-parent6" id="frameContainer1">
+            <div class="hide-bg-copy-container">
+              <div class="hide-bg-copy2"></div>
+            </div>
+
+
+
+            <a href="{% url 'customers' %}" class="menu-item-link" style="text-decoration: none">
+              <div class="menu-itemstandard1">
+                <div class="iconlyregularlight3-user-parent">
+                  <img
+                    class="iconlyregularlight3-user"
+                    alt="Customers Icon"
+                    src="{% static 'public/iconlyregularlight3-user.svg' %}"
+                  />
+                  <div class="menu-item-container">
+                    <b class="menu-item1">Customers</b>
+                  </div>
                 </div>
+              </div>
+            </a>
+          </div>
+
+          
+          <div class="frame-parent7" id="frameContainer2">
+            <div class="hide-bg-copy-frame">
+              <div class="hide-bg-copy3"></div>
             </div>
-            <div class="name-header">
-                <div class="name-label">
-                    <div class="name1">John</div>
+          
+
+          <a href="{% url 'movies' %}" class="menu-item-link" style="text-decoration: none">
+            <div class="menu-itemstandard2">
+              <div class="bx-movie-playsvg-parent">
+                <img
+                  class="bx-movie-playsvg-icon"
+                  alt=""
+                  src="{% static './public/bxmovieplaysvg.svg'%}"/>
+                <div class="menu-item-frame">
+                  <b class="menu-item2">Movies</b>
                 </div>
+              </div>
             </div>
-            <div class="header-cell">
-                <div class="contact">Doe</div>
-            </div>
-            <div class="header-cell1">
-                <div class="email1">john.doe@example.com</div>
-            </div>
-            <div class="header-cell2">
-                <div class="age">123-456-7890</div>
-            </div>
-            <div class="header-cell3">
-                <div class="gender">California</div>
-            </div>
-            <div class="header-cell4">
-                <div class="city">Los Angeles</div>
-            </div>
-            <div class="action-header">
-                <div class="actions">
-                    <button>Edit</button>
-                    <button>Delete</button>
+          </a>  
+
+
+          
+          </div>
+          <div style="padding-left: 24px; margin-top: -10px">
+            <a href="{% url 'movies' %}" class="menu-item-link" style="text-decoration: none">
+                <div class="menu-itemstandard2">
+                  <div class="bx-movie-playsvg-parent">
+                    <img
+                      class="bx-movie-playsvg-icon"
+                      alt=""
+                      src="{% static './public/bxmovieplaysvg.svg'%}"/>
+                    <div class="menu-item-frame">
+                      <b class="menu-item2">Movies</b>
+                    </div>
+                  </div>
                 </div>
+              </a> 
+
             </div>
+          
         </div>
-        <!-- Add more rows as needed -->
+
+        <img class="divider-icon2" alt="" src="{% static './public/divider-2.svg'%}" />
+      </div>
+      <img class="frame-icon" loading="lazy" alt="" src="{% static './public/frame.svg'%}" />
     </div>
-</body>
+
+    <script src="{% static '/script/script.js' %}">
+  </body>
 </html>

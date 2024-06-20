@@ -1,0 +1,78 @@
+
+.message-modal .modal-dialog {
+    max-width: 600px;
+}
+.message-modal .modal-header,
+.message-modal .modal-footer {
+    border: none;
+}
+.message-modal .modal-body {
+    max-height: 400px;
+    overflow-y: auto;
+}
+.message {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+.message img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.message .content {
+    background: #f1f1f1;
+    border-radius: 10px;
+    padding: 10px 15px;
+    max-width: 75%;
+}
+.message .time {
+    font-size: 0.8rem;
+    color: #777;
+    margin-left: auto;
+    padding-left: 10px;
+}
+.message.you .content {
+    background: #007bff;
+    color: white;
+    margin-left: auto;
+}
+.message.you img {
+    order: 1;
+    margin-left: 10px;
+    margin-right: 0;
+}
+.message.you .time {
+    margin-left: 0;
+    padding-left: 0;
+    padding-right: 10px;
+}
+
+.info-section {
+    display: flex; /* Make the section a flex container */
+    justify-content: space-between; /* Distribute elements evenly with space around */
+    margin-bottom: 1rem; /* Add some margin below the section */
+    color: #8A8C8F;
+}
+
+.info-section div { /* Style all child divs inside the section */
+    padding: 1rem;
+    width: 130px;
+    height: 130px;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+}
+.info-section strong{
+    font-size: 24px;
+    color: #007BFF;
+}
+
+.info-section h6 { /* Style the headings inside the boxes */
+  margin-bottom: 0.5rem; /* Add some space below the heading */
+}
+.div-item{
+    border-bottom: 1px solid #dee2e6; 
+    padding: 0.5rem 0;
+}

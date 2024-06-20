@@ -19,6 +19,10 @@ def home(request):
     return render(request, 'index.html')
 
 
+def base(request):
+    return render(request, 'base.html')
+
+
 # function to handle login from the user
 def login(request):
     if request.method == "POST":
@@ -120,6 +124,29 @@ def get_movie(request, key):
     return render(request, 'movies.html')
 
 
+#@api_view(['POST'])
+#def post_movie(request):
+#    if request.method == 'POST':
+#        title = request.POST.get("title")
+#        genre = request.POST.get("genre")
+#        price = request.POST.get("price")
+#        language = request.POST.get("language")
+#        
+#        try:
+#            movie = Movie.objects.create(
+#                title=title,
+#                genre = Genre.objects.get(name=genre),
+#                price= price,
+#                language=language,
+#            )
+#            return JsonResponse({"success": "Movie added"})
+#
+#        except Exception as error:
+#            return JsonResponse({"message": str(error)})
+            
+
+
+
 @api_view(['POST'])
 def add_movie(request):
     if request.method == 'POST':
@@ -130,7 +157,7 @@ def add_movie(request):
         try:
             movie =  Movie.objects.create(
             title=title,
-            genre = Genre.objects.get(genre=type),
+            genre = Genre.objects.get(name=type),
             language=language,
             price = price
             )
@@ -149,15 +176,15 @@ def add_customer(request):
         zip_code = request.POST.get("zipcode")
         phone_number = request.POST.get("phone")
         
-        #print(f'{Fname} {Lname} {city} {email} {zip_code} {phone_number}')
+        print(f'{Fname} {Lname} {city} {email} {zip_code} {phone_number}')
         
         customer = Customer.objects.create(
-            Fname=Fname,
-            Lname=Lname,
+            first_name=Fname,
+            last_name=Lname,
             city=city,
             phone=phone_number,
-            zip_code=zip_code,
-            email=email 
+            zip_code=ZipCode.objects.get(zip_code=zip_code),
+            email=email,
         )
         
         return JsonResponse({"success": Fname})
@@ -207,54 +234,58 @@ def get_genres(request):
 
 
 def get_customerDetails (request, customer_id):
-    with connection.cursor() as cursor:
-        cursor.execute("SELECT* FROM base_customer WHERE id =%s", [customer_id])
-        customer =cursor.fetchone()
-
-    if customer is None:
-        return render(request, 'custome_detail.html', {'error': 'Customer not found'})
+    #with connection.cursor() as cursor:
+    #    cursor.execute("SELECT* FROM base_customer WHERE id =%s", [customer_id])
+    #    customer =cursor.fetchone()
     
-    return render(request, 'customer_detail.html',{'customer' : customer})
+    customer = Customer.objects.get(pk=customer_id)
+    serializer = customer_serializers(customer)
+    return JsonResponse(serializer.data)
 
 
-def update_customer (request):
+@api_view(['POST'])
+def update_customer (request, id):
     if request.method =='POST':
-        Fname = request.POST.get("Fname")
-        Lname = request.POST.get("Lname")
         city = request.POST.get("city")
-        state = request.POST.get("state")
+        email = request.POST.get("email")
         zip_code = request.POST.get("zipcode")
         phone_number = request.POST.get("phone")
-
-
-        # #ensure zip code is a valid integer
-        # try:
-        #     zip_code =(int zip_code)
-        # except ValueError:
-        #     #Handle the error, maybe return an error message
-        #     return render (request, 'add customers.html', {'error':'Zip code must be a 5- digit number.'})
+        customer = Customer.objects.get(pk=id)
+        print("fuck", city)
         
-        with connection.cursor()as cursor:
-            cursor. execute (
-                "UPDATE base_customer SET Fname = %s, Lname = %s, city = %s, state = %s, zip_code = %s, phone_number = %s WHERE id = %s",
-                [Fname, Lname, city, state, zip_code, phone_number, id]
+        print(f'{city} {zip_code} {phone_number} {email}')
+        if city != None:
+            customer.city = city
+        if zip_code != None:
+            customer.zip_code = ZipCode.objects.get(zip_code=zip_code)
+        if phone_number != None:
+            customer.phone != email
+        if email != None:
+            customer.email = email
+            
+        customer.save()
+        
+        return JsonResponse({"success": "success"})
 
-            )
-        return redirect ('customer')
-    with connection.cursor() as cursor:
-        cursor.execute("SELECT * FROM base_customer WHERE id = %s", [id])
-        customer = cursor.fetchone()
+        
 
-    if customer is None:
-        return render (request, 'update_customer.html', {'erroe': 'Customer'})
-    return render(request, 'Update_customer.html', {'customer': customer})
+        #with connection.cursor()as cursor:
+        #    cursor. execute (
+        #        "UPDATE base_customer SET city = %s, state = %s, zip_code = %s, phone_number = %s, email = %s, WHERE id = %s",
+        #        [city, state, zip_code, phone_number, email, id]
+#
+        #    )
+        return JsonResponse({"message": "success"})
 
-
-def delete_customer (request, customer_id):
-    with connection.cursor() as cursor:
-        cursor.execute ("DELETE FROM base_customer WHERE id=%s", [customer_id])
-
-    return redirect ('customer')    
+@api_view(['DELETE'])
+def delete_customer (request, id):
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute ("DELETE FROM base_customer WHERE id=%s", [id])
+            return JsonResponse({"success": "success"})
+    except Exception as e:
+        return JsonResponse({"error": str(e)})
+           
         
 
 
@@ -271,3 +302,30 @@ def get_city(request, key):
 
         
     
+
+def transactions(request):
+    return render(request, 'rentals.html')
+
+
+
+@api_view(['GET'])
+def get_metrics(request):
+    pass
+    
+    
+    
+@api_view(['GET'])
+def home_metrics(request):
+    customers = Customer.objects.all().count()
+    movies = Movie.objects.all().count()
+    rental = Rental.objects.all()
+    rentals = rental.count()
+    
+    profit = 0
+    for items in rental:
+        profit = profit + int(items.rental_cost_total)
+        
+    return JsonResponse({"customers": customers,
+                         "movies": movies,
+                         "rentals": rentals,
+                         "profits": profit})

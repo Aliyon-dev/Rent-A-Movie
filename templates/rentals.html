@@ -40,8 +40,7 @@
   </head>
   <body>
     <script>
-
-      function get_city1(){
+      function get_city(){
         $(document).ready(function(){
           var zipcode = document.getElementById("Zipcode").value
           console.log(zipcode)
@@ -59,28 +58,6 @@
           })
         })
       }
-
-      
-      function get_city(){
-        $(document).ready(function(){
-          var zipcode = document.getElementById("zipcode").value
-          console.log(zipcode)
-          $.ajax({
-            url: '/get-city/' + String(zipcode),
-            method: 'GET',
-            success: function(data){
-              $('#City2').val(data.city);
-              
-      
-            },
-            error: function(data){
-              $('#City').val(data.city);
-            }
-          })
-        })
-      }
-
-      
 
     </script>  
 
@@ -128,7 +105,7 @@
 
                       <div class="form-group">
                         <label for="name"> .. </label>
-                        <button type="button" class="btn btn-secondary btn-block py-2" style="width: 200px" onclick="get_city1()"> get city </button>
+                        <button type="button" class="btn btn-secondary btn-block py-2" style="width: 200px" onclick="get_city()"> get city </button>
                       </div>
 
                     </div>  
@@ -198,7 +175,7 @@
           </div>
 
           <div>
-            <h6>Active Rentals</h6>
+            <h6>Metric 1</h6>
             <strong> 100 </strong>
         </div>
       </div>
@@ -220,11 +197,7 @@
     </div>
 
         <p id="modal-content"></p>
-        <div style="display:flex; flex-direction: column; gap: 10px">
-          <button style="width: 100%" type="button" class="btn btn-primary" id="openSecondModal">Send Message</button>
-          <button style="width: 100%" type="button" class="btn btn-outline-primary" id="openEditModal" data-toggle="modal" data-target="#editModal"   >edit customer</button>
-          <button style="width: 100%" type="button" class="btn btn-outline-danger" id="openDelete">Delete Customer</button>
-        </div>
+        <button style="width: 100%" type="button" class="btn btn-primary" id="openSecondModal">Send Message</button>
       </div>
     </div>
   </div>
@@ -277,32 +250,6 @@
 <!-- CHAT MODAL END -->
 
 
-<!--- POP UP DELETE MODAL -->
-<div class="modal fade message-modal" id="deleteModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-
-      <div class="modal-body">
-        <p>Are you sure you want to delete this item?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button id="confirmDeleteBtn" type="button" class="btn btn-danger">Yes, Delete</button>
-      </div>
-
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
 
 
 
@@ -313,69 +260,53 @@
   <div>
 
     <!-- Edit Movie Modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="rowModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content" style=" width: 550px; max-height: 700px; overflow-y: auto;">
-          <div class="modal-header">
-            <h5 class="modal-title" id="rowModalLabel">Customer Details</h5>
+<div class="modal fade" id="contactModalLabe" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content"> 
+        <div class="modal-header">
+            <h5 class="modal-title" id="contactModalLabel"> Edit Movie </h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
+                <span aria-hidden="true">&times;</span>
             </button>
-          </div>
-          <div class="modal-body">
-            <form id="editForm" method="post">
+        </div>
+        <div class="modal-body">
+            <form id="edit_movie" method="post">
               {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="name"> Movie Title </label>
+                    <input placeholder="movie" type="text" class="form-control" id="edit_title" name="title" required>
+                </div>
+
               <div class="modal--body">
-                <label for="email">Phone number </label>
-                <input type="integer" class="form-control"name="phone" id="phone2">
+                <label for="email">Genre</label>
+                <select id="editDropdown" class="form-control">
+                  <option value="option"> Select...</option>
+                </select>
+
+
               </div>
-
-
-              <div class="name" style="display: flex; flex-direction: row; gap: 20px; margin-top: 20px; align-items: center;">
-                <div class="form-group">
-                  <label for="name"> ZipCode </label>
-                  <input type="text" class="form-control" id="zipcode" name="title">
-                </div>
-
-                <div class="form-group">
-                  <label for="name"> .. </label>
-                  <button type="button" class="btn btn-secondary btn-block py-2" style="width: 200px" onclick="get_city()"> get city </button>
-                </div>
-
-              </div>  
+                <div class="form-group" style="margin-top: 20px">
+                  <label for="email">Price</label>
+                  <input type="integer" class="form-control"name="price" id="edit_price" required>
+              </div>
 
               <div style="display: flex; flex-direction: column; gap:10px; margin-top:10px">
-                <label> City </label>
-                <input type="text" class="form-control" id="City2" name="language" readonly>
-                
+                <label> Upload thumbnail </label>
+                <input type="file" name="file" id="file" accept=".png" required>
               </div>
 
 
 
-              <div style="display: flex; flex-direction: column; gap:10px; margin-top:10px">
-                <label> Email </label>
-                <input type="text" class="form-control" id="email2" name="language" >
-                
-              </div>
-              <div class="py-4">
-                  <button type="submit" class="btn btn-primary btn-block py-2"> Save Changes </button>
-              </div>
+                <div class="py-4">
+                  <button type="submit" class="btn btn-primary btn-block py-2">Save Changes </button>
+                </div>
             
             </form>
             <div id="formResponse" class="mt-3"></div>
-            
-            <!--  end of form -->
-
-
-   
-          </div>
         </div>
-      </div>
     </div>
-
-
-  <!-- Edit movie End -->
-
+</div>
 </div>
 </div>
 
@@ -421,17 +352,17 @@
           <a href="{% url 'customers' %}" class="menu-item-link" style="text-decoration: none; color: #fff">
               <div class="frame-parent11">
                 <div class="hide-bg-copy-wrapper1">
-                  <div class="hide-bg-copy5"></div>
+                  <div class="hide-bg-copy6"></div>
                 </div>
 
-                <div class="menu-itemstandard4">
+                <div class="menu-itemstandard5">
                   <div class="iconlyregularlight3-user-group">
                     <img
                       class="iconlyregularlight3-user1"
                       alt=""
-                      src="{% static './public/iconlyregularlight3-user1.svg'%}"/>
+                      src="{% static './public/iconlyregularlight3-user.svg'%}"/>
                     <div class="menu-item-wrapper1">
-                      <b class="menu-item4" style="color: #fff">Customers</b>
+                      <b class="menu-item4" style="color: #000">Customers</b>
                     </div>
                   </div>
                 </div>
@@ -442,17 +373,17 @@
             <a href="{% url 'rentals' %}" class="menu-item-link" style="text-decoration: none; color: #fff">
               <div class="frame-parent11">
                 <div class="hide-bg-copy-wrapper1">
-                  <div class="hide-bg-copy6"></div>
+                  <div class="hide-bg-copy5"></div>
                 </div>
 
-                <div class="menu-itemstandard5">
+                <div class="menu-itemstandard4">
                   <div class="iconlyregularlight3-user-group">
-                    <img
+                    <img 
                       class="iconlyregularlight3-user1"
                       alt=""
-                      src="{% static './public/rental.svg'%}"/>
+                      src="{% static './public/rentalw.svg'%}"/>
                     <div class="menu-item-wrapper1">
-                      <b class="menu-item4" style="color: #000">Rentals</b>
+                      <b class="menu-item4" style="color: #fff">Rentals</b>
                     </div>
                   </div>
                 </div>
@@ -509,9 +440,9 @@
 
             <div class="header" style="height:52px; border-radius: 16px; display: flex; flex-direction: row; justify-content: space-between; width: 100%">
                 <div class="flex" style="display:flex; flex-direction: row; align-items: center; gap: 20px">
-                  <b style="font-size: 20px"> Customers </b>
+                  <b style="font-size: 20px"> Rentals </b>
                     <button class="buttons-filled-no-icon-m" id="add"  data-toggle="modal" data-target="#contactModal">
-                      <b class="add-customer" style="align: center; justisfy-content: center">Add Customer</b>
+                      <b class="add-customer" style="align: center; justisfy-content: center">Add Rental</b>
                    </button>
                 </div>
 
@@ -733,95 +664,16 @@
             $('#rowModal').modal('hide');
             message(id)
             });
-          $('#openEditModal').on('click', function(){
-            $('#rowModal').modal('hide');
-            EditCustomer(id)
-          })
-
-          $('#openDelete').on('click', function(){
-            $('#rowModal').modal('hide');
-            delCustomer(id)
-            console.log(id)
-
-          })
         });
 
-      
 
-      //MESSAGE
       function message(ID){
         $('#messageModal').modal('show')
         console.log(ID);
       }
-      // DELETE CUSTOMER 
-      function delCustomer(ID){
-        var csrftoken = $('[name=csrfmiddlewaretoken]').val();
-        $('#deleteModal').modal('show')
-        $('#confirmDeleteBtn').on('click', function(){
-          console.log(ID)
-          $.ajax({
-            url: '{% url "delete_customer" 0 %}'.replace(/0/, ID),
-            method: 'DELETE',
-            headers: {
-              'X-CSRFToken': csrftoken
-            },
-            success: function(){
-              console.log("Customer deleted successfully");
-              window.alert("customer deleted ")
-              $('#deleteModal').modal('hide'); 
-              location.reload();
-            },
-            error:function(xhr, status, error){
-              console.error('Error fetching data:', error);
-
-            }
-          })
-        })
-      }
 
 
-      //EDIT CUSTOMER
-      function EditCustomer(ID){
-        $('#editModal').modal('show')
-        $.ajax({
-          url: '{% url "customer_detail" 0 %}'.replace(/0/, ID),
-          method: 'GET',
-          success: function(data){
-            console.log(data.first_name)
-            $('#Fname').attr("value",data.first_name);
-            
-          }
-        })
-
-
-        $('#editForm').on('submit', function(event){
-          event.preventDefault();
-          $.ajax({
-              method: 'POST',
-              url: '{% url "update_customer" 0 %}'.replace(/0/, ID),
-              data: {
-                  'phone': $('#phone2').val(),
-                  'zipcode': $('#zipcode').val(),
-                  'city': $('#City2').val(),
-                  'email': $('#email2').val(),
-                  'csrfmiddlewaretoken': '{{ csrf_token }}'
-              },
-              success: function(response){
-                  $('#formResponse').text('Movie successfuly added');
-                  $('#editForm')[0].reset();
-              },
-              error: function(response){
-                  $('#formResponse').text('An error occurred. Please try again.');
-              }
-          });
-      });
-      }
-
-
-
-
-
-      $('#custom-search').on('keyup', function() {
+        $('#custom-search').on('keyup', function() {
           table.search(this.value).draw();
       });
 
@@ -869,6 +721,35 @@
 
   ////////////////////// EDITING A MOVIE ENTITY ////////////////////
 
+    // Load data into dropdown when modal is shown
+    $('#edit').on('show.bs.modal', function() {
+      console.log("Modal is being shown");
+      var movieID =  document.getElementById("id").innerHTML;
+      console.log(movieID)
+      
+      $.ajax({
+          url: '{% url 'get-movie' 1 %}'.replace(/0/, movieID.innerHTML),
+          method: 'GET',
+          success: function(data) {
+              console.log('AJAX request successful');
+              console.log('Genres data:', data);
+                 // Update form fields with the received data
+            $('#titleInput').val(data.title);
+            $('#typeInput').val(data.type);
+            $('#priceInput').val(data.price);
+              
+          },
+          error: function(xhr, status, error) {
+              console.error('AJAX request failed');
+              console.error('Status:', status);
+              console.error('Error:', error);
+              alert('Failed to load data');
+          }
+      });
+
+      
+  });
+
 
     });
 
@@ -914,7 +795,7 @@
         //event.preventDefault();
         $.ajax({
             method: 'POST',
-            url: '{% url "add_customer"  %}',
+            url: 'http://127.0.0.1:8000/add-customer',
             data: {
                 'fname': $('#Fname').val(),
                 'lname': $('#Lname').val(),
