@@ -40,24 +40,7 @@
   </head>
   <body>
     <script>
-      function get_city(){
-        $(document).ready(function(){
-          var zipcode = document.getElementById("Zipcode").value
-          console.log(zipcode)
-          $.ajax({
-            url: '/get-city/' + String(zipcode),
-            method: 'GET',
-            success: function(data){
-              $('#City').val(data.city);
-              
-      
-            },
-            error: function(data){
-              $('#City').val(data.city);
-            }
-          })
-        })
-      }
+
 
     </script>  
 
@@ -65,66 +48,49 @@
 
     <div>
           <!-- Add Movie Modal -->
-    <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+    <div class="modal fade" id="rentalModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
           <div class="modal-content">
               <div class="modal-header">
-                  <h5 class="modal-title" id="contactModalLabel"> Add Customer </h5>
+                  <h5 class="modal-title" id="contactModalLabel"> Add Rental </h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                   </button>
               </div>
               <div class="modal-body">
-                  <form id="contactForm" method="post">
+                  <form id="rentalForm" method="post">
                     {% csrf_token %}
-
-                    <div class="name" style="display: flex; flex-direction: row; gap: 20px">
-                      <div class="form-group">
-                        <label for="name"> First Name </label>
-                        <input type="text" class="form-control" id="Fname" name="title" required>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="name"> Last Name </label>
-                        <input type="text" class="form-control" id="Lname" name="title" required>
-                      </div>
-                    </div>  
+ 
 
 
                     <div class="modal--body">
-                      <label for="email">Phone number </label>
-                      <input type="integer" class="form-control"name="Phone" id="Phone" required>
+                      <label for="email"> Customer </label>
+                      <select id="customerDropdown" class="form-control">
+                        <option value="option"> Select...</option>
+                      </select>
+                    </div>
+
+                    <div class="modal--body" style="margin-top: 20px">
+                      <label for="email"> Movie </label>
+                      <select id="movieDropdown" class="form-control">
+                        <option value="option"> Select...</option>
+                      </select>
                     </div>
 
 
                     <div class="name" style="display: flex; flex-direction: row; gap: 20px; margin-top: 20px; align-items: center;">
                       <div class="form-group">
-                        <label for="name"> ZipCode </label>
-                        <input type="text" class="form-control" id="Zipcode" name="title" required>
+                        <label for="name"> Rental Date </label>
+                        <input style="width: 200px" type="datetime-local" class="form-control" id="rentalDate" name="title" required>
                       </div>
 
                       <div class="form-group">
-                        <label for="name"> .. </label>
-                        <button type="button" class="btn btn-secondary btn-block py-2" style="width: 200px" onclick="get_city()"> get city </button>
+                        <label for="name"> Rental Expiry </label>
+                        <input style="width: 200px"type="datetime-local" class="form-control" id="rentalExpiry" name="title" required>
                       </div>
-
                     </div>  
-
-                    <div style="display: flex; flex-direction: column; gap:10px; margin-top:10px">
-                      <label> City </label>
-                      <input type="text" class="form-control" id="City" name="language" required readonly>
-                      
-                    </div>
-
-
-
-                    <div style="display: flex; flex-direction: column; gap:10px; margin-top:10px">
-                      <label> Email </label>
-                      <input type="text" class="form-control" id="Email" name="language" required>
-                      
-                    </div>
                     <div class="py-4">
-                        <button type="submit" class="btn btn-primary btn-block py-2"> Add Customer </button>
+                        <button type="submit" class="btn btn-primary btn-block py-2"> Add Rental </button>
                     </div>
                   
                   </form>
@@ -441,7 +407,7 @@
             <div class="header" style="height:52px; border-radius: 16px; display: flex; flex-direction: row; justify-content: space-between; width: 100%">
                 <div class="flex" style="display:flex; flex-direction: row; align-items: center; gap: 20px">
                   <b style="font-size: 20px"> Rentals </b>
-                    <button class="buttons-filled-no-icon-m" id="add"  data-toggle="modal" data-target="#contactModal">
+                    <button class="buttons-filled-no-icon-m" id="add"  data-toggle="modal" data-target="#rentalModal">
                       <b class="add-customer" style="align: center; justisfy-content: center">Add Rental</b>
                    </button>
                 </div>
@@ -468,12 +434,12 @@
               <thead>
                   <tr style="color: #8E9EAD">
                       <th>ID</th>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>Phone</th>
-                      <th>Zip Code</th>
-                      <th>street address </th>
-                      <th>Email</th>
+                      <th>Rental Date</th>
+                      <th>Customer Name</th>
+                      <th>Movie Name</th>
+                      <th>Price</th>
+                      <th>Tax</th>
+                      <th>Total Price</th>
                        
                   </tr>
               </thead>
@@ -687,12 +653,12 @@
       data.forEach(item => {
           table.row.add([
               item.id,
-              item.first_name,
-              item.last_name,
-              item.phone,
-              item.zip_code,
-              item.city,
-              item.email,
+              item.rental_date,
+              item.customer.first_name + " " + item.customer.last_name,
+              item.movie.title,
+              item.movie.price,
+              item.rental_tax,
+              item.rental_cost_total,
 
           ]).draw(false); // Draw added row without redrawing entire table
       });
@@ -700,7 +666,7 @@
 
     /* Making API calls to get movies from the backend */
     $.ajax({
-      url: '{% url "get_customers" %}', // API endpoint
+      url: '{% url "get_rentals" %}', // API endpoint
       method: 'GET',
       dataType: 'json',
       success: function(data) {
@@ -722,35 +688,6 @@
   ////////////////////// EDITING A MOVIE ENTITY ////////////////////
 
     // Load data into dropdown when modal is shown
-    $('#edit').on('show.bs.modal', function() {
-      console.log("Modal is being shown");
-      var movieID =  document.getElementById("id").innerHTML;
-      console.log(movieID)
-      
-      $.ajax({
-          url: '{% url 'get-movie' 1 %}'.replace(/0/, movieID.innerHTML),
-          method: 'GET',
-          success: function(data) {
-              console.log('AJAX request successful');
-              console.log('Genres data:', data);
-                 // Update form fields with the received data
-            $('#titleInput').val(data.title);
-            $('#typeInput').val(data.type);
-            $('#priceInput').val(data.price);
-              
-          },
-          error: function(xhr, status, error) {
-              console.error('AJAX request failed');
-              console.error('Status:', status);
-              console.error('Error:', error);
-              alert('Failed to load data');
-          }
-      });
-
-      
-  });
-
-
     });
 
 ////////////////////// MOVIE EDIT END ///////////////////////////
@@ -762,22 +699,22 @@
 
   /////////////////////// ADD MOVIE TO THE BACKEND //////////////////////
         $(document).ready(function(){
-          $('#contactModal').on('show.bs.modal', function() {
+          $('#rentalModal').on('show.bs.modal', function() {
             console.log("Modal is being shown");
-            
+            //GET MOVIES
             $.ajax({
-                url: '{% url "get_genres" %}',
+                url: '{% url "get_movies" %}',
                 method: 'GET',
                 success: function(data) {
                     console.log('AJAX request successful');
                     console.log('Genres data:', data);
                     
-                    var dropdown = $('#dataDropdown');
+                    var dropdown = $('#movieDropdown');
                     dropdown.empty();
                     
                     data.forEach(function(item) {
-                        console.log('Processing item:', item.genre);
-                        dropdown.append($('<option></option>').attr('value', item.genre).text(item.genre));
+                        console.log('Processing item:', item.title);
+                        dropdown.append($('<option></option>').attr('value', item.title).text(item.title));
                     });
                 },
                 error: function(xhr, status, error) {
@@ -787,27 +724,53 @@
                     alert('Failed to load data');
                 }
             });
+
+            //GET CUSTOMERS
+            $.ajax({
+              url: '{% url "get_customers" %}',
+              method: 'GET',
+              success: function(data) {
+                  console.log('AJAX request successful');
+                  console.log('Genres data:', data);
+                  
+                  var dropdown = $('#customerDropdown');
+                  dropdown.empty();
+                  
+                  data.forEach(function(item) {
+                      console.log('Processing item:', item.first_name);
+                      dropdown.append($('<option></option>').attr('value', item.first_name + " " + item.last_name).text(item.first_name + " " + item.last_name));
+                  });
+              },
+              error: function(xhr, status, error) {
+                  console.error('AJAX request failed');
+                  console.error('Status:', status);
+                  console.error('Error:', error);
+                  alert('Failed to load data');
+              }
+          });
         });
 
       //submit form 
       
-      $('#contactForm').on('submit', function(event){
-        //event.preventDefault();
+      $('#rentalForm').on('submit', function(event){
+        event.preventDefault();
+        var customer = $('#customer');
+        console.log(customer)
         $.ajax({
             method: 'POST',
-            url: 'http://127.0.0.1:8000/add-customer',
+            url: '{% url "add_rental" %}',
             data: {
-                'fname': $('#Fname').val(),
-                'lname': $('#Lname').val(),
-                'phone': $('#Phone').val(),
-                'zipcode': $('#Zipcode').val(),
-                'city': $('#City').val(),
-                'email': $('#Email').val(),
+                'customer': $('#customerDropdown').val(),
+                'movie': $('#movieDropdown').val(),
+                'rental_date': $('#rentalDate').val(),
+                'rental_expiry': $('#rentalExpiry').val(),
                 'csrfmiddlewaretoken': '{{ csrf_token }}'
             },
             success: function(response){
-                $('#formResponse').text('Movie successfuly added');
+                $('#formResponse').text('Rental successfuly added');
                 $('#contactForm')[0].reset();
+                location.reload();
+
             },
             error: function(response){
                 $('#formResponse').text('An error occurred. Please try again.');

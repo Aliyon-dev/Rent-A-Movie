@@ -189,32 +189,21 @@
           <div class="info-section d-flex justify-content-around" style="margin-bottom: 1rem;">
             <div>
                 <h6>Amount Spent</h6>
-                <strong> 100 </strong>
+                <strong id="amount"> 100 </strong>
             </div>
 
             <div>
               <h6>Movies rented </h6>
-              <strong > 100 </strong>
+              <strong id="rented" > 100 </strong>
           </div>
 
           <div>
             <h6>Active Rentals</h6>
-            <strong> 100 </strong>
+            <strong id="active"> 100 </strong>
         </div>
       </div>
       <h6>Rented Movies</h6>
-      <div class="rented movies" style="background-color: #f8f9fa; padding: 1rem; margin-bottom: 1rem; max-height: 150px; overflow-y: auto;">
-       
-        <div class="movie-item" style="border-bottom: 1px solid #dee2e6; padding: 0.5rem 0; color: #007BFF">
-          <h6 class="movie-title" > Title </h6> 
-          <p> rented on: </P> 
-        </div>
-
-        <div class="movie-item" >
-          <h6 class="movie-title" > Title </h6> 
-          <p> rented on: </P> 
-
-        </div>
+      <div class="rented movies" id="rented_movie" style="background-color: #f8f9fa; padding: 1rem; margin-bottom: 1rem; max-height: 150px; overflow-y: auto;">
 
       </div>  
     </div>
@@ -729,6 +718,37 @@
           $('#phone').text(phone)
           $('#rowModal').modal('show');
 
+          //GET METRICS//
+
+          $.ajax({
+            url: '{% url "get_customer_metrics" 0 %}'.replace(/0/, id),
+            method: 'GET',
+            success: function(data){
+              $('#amount').text("K" + data.amount_spent)
+              $('#rented').text(data.movies_rented)
+              $('#active').text(data.active_rentals)
+              $('#rented_movie').empty();
+              for (var key in data.movies) {
+                if (data.movies.hasOwnProperty(key)) {
+                    var movie = data.movies[key];
+                    console.log(movie[1])
+                    var movieHtml = '<div class="movie-item">';
+                    movieHtml += '<h6>' + movie[0] + '</h6>';
+                    movieHtml += '<p>Rented on: ' + movie[1] + '</p>';
+                    movieHtml += '</div>';
+           // Append the generated HTML to the container
+                  $('#rented_movie').append(movieHtml + '<hr>');
+                    
+                }
+              }  
+
+            }
+          })
+
+
+
+
+
           $('#openSecondModal').on('click', function() {
             $('#rowModal').modal('hide');
             message(id)
@@ -753,6 +773,8 @@
         $('#messageModal').modal('show')
         console.log(ID);
       }
+
+
       // DELETE CUSTOMER 
       function delCustomer(ID){
         var csrftoken = $('[name=csrfmiddlewaretoken]').val();

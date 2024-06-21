@@ -41,7 +41,7 @@ class MovieActor(models.Model):
         return f'{self.actor} in {self.movie}'
 
 class Rental(models.Model):
-    customer = models.ForeignKey('Customer', on_delete=models.CASCADE)
+    customer = models.ForeignKey('Customer', on_delete=models.SET_NULL, null=True, blank=True)
     movie = models.ForeignKey('Movie', on_delete=models.CASCADE)
     rental_date = models.DateField(auto_now=False)
     rental_expiry = models.DateField(auto_now=False)

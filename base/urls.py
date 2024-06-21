@@ -21,6 +21,11 @@ urlpatterns = [
     path('delete-customer/<int:id>', delete_customer, name='delete_customer'),
     path('get-city/<str:key>', get_city, name="get_city"),
     path('metrics', home_metrics, name="home_metrics"),
+    path('get-rentals',get_rentals, name="get_rentals"),
+    path('add-rental', add_rental, name="add_rental"),
+    path('get-top-genres', get_top_genres, name="get_top_genres"),
+    path('get-customer-metrics/<int:id>', get_customer_metrics, name="get_customer_metrics")
+    
     #path('post-movie', post_movie, name="post_movie"),
     
 ]

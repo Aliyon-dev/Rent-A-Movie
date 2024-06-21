@@ -6,11 +6,13 @@ from django.shortcuts import redirect
 from django.db import connection
 from .models import *
 from rest_framework.decorators import api_view
-from .serializers import genre_serializer, movie_serializer, customer_serializers, zipcode_serializers
+from .serializers import genre_serializer, movie_serializer, customer_serializers, zipcode_serializers, rental_serializers
 from django.http import JsonResponse
 from .models import Customer
 from rest_framework.response import Response
 from rest_framework import status
+from datetime import datetime
+import pytz
 
 # Create your views here.
 
@@ -279,14 +281,10 @@ def update_customer (request, id):
 
 @api_view(['DELETE'])
 def delete_customer (request, id):
-    try:
-        with connection.cursor() as cursor:
-            cursor.execute ("DELETE FROM base_customer WHERE id=%s", [id])
-            return JsonResponse({"success": "success"})
-    except Exception as e:
-        return JsonResponse({"error": str(e)})
-           
-        
+    with connection.cursor() as cursor:
+        cursor.execute ("DELETE FROM base_customer WHERE id=%s", [id])
+        return JsonResponse({"success": "success"})
+    return JsonResponse({"error": str(e)})
 
 
 
@@ -329,3 +327,96 @@ def home_metrics(request):
                          "movies": movies,
                          "rentals": rentals,
                          "profits": profit})
+
+@api_view(['GET'])
+def get_rentals(request):
+    if request.method == 'GET':
+        rentals = Rental.objects.select_related('movie', 'customer').all()
+        for rental in rentals:
+            print(rental.movie.title)
+        serializer = rental_serializers(rentals, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+
+
+@api_view(['POST'])
+def add_rental(request):
+    if request.method == 'POST':
+        customer = request.POST.get("customer")
+        movie   = request.POST.get("movie")
+        rental_date = request.POST.get("rental_date")
+        rental_expiry = request.POST.get("rental_expiry")
+        #tax_rate = request.POST.get("tax_rate")
+        db_movie =  Movie.objects.get(title=movie)
+        cost = float(db_movie.price)
+        total_cost = cost + (cost*(float(15)/100))
+        first_name = customer.split(" ")[0]
+        last_name= customer.split(" ")[1]
+        
+        name = customer.split(" ")
+        print(name)
+        
+        print(last_name)
+        
+        rental_date_ = datetime.strptime(rental_date, '%Y-%m-%dT%H:%M')
+        rental_expiry_ = datetime.strptime(rental_expiry, '%Y-%m-%dT%H:%M')
+        
+    
+        rental = Rental.objects.create(
+            customer=Customer.objects.get(first_name=first_name, last_name=last_name),
+            movie = db_movie,
+            rental_date = rental_date_,
+            rental_expiry = rental_expiry_,
+            rental_tax = 15,
+            rental_cost_total=total_cost              
+        )
+        return JsonResponse({"Message": "Success"})
+        
+    
+    
+@api_view(['GET'])
+def get_top_genres(request):
+    rentals = Rental.objects.select_related('movie').all()
+    genre = []
+    for rental in rentals:
+        movie = Movie.objects.select_related('genre').get(title=rental.movie.title)
+        genre_ = (movie.genre.name)
+        genre.append(genre_)
+    
+    print(genre)   
+    counts = {item: genre.count(item) for item in set(genre)}
+    print(counts)
+    sorted_counts = dict(sorted(counts.items(), key=lambda item: item[1], reverse=True)[:6])
+    return JsonResponse(sorted_counts)
+    
+        
+@api_view(['GET'])
+def get_customer_metrics(request, id):
+    customer = Customer.objects.get(pk=id)
+    name = customer.first_name + " "+ customer.last_name
+    rentals = Rental.objects.select_related('customer', 'movie').filter(customer=id)
+    movies_rented = rentals.count()
+    amount_spent = 0
+    active_rentals = 0
+    movies = []
+    i = 0
+
+    for rental in rentals:
+        amount_spent = amount_spent + rental.rental_cost_total
+        date = rental.rental_expiry
+        now =  datetime.today().date()
+        if date > now:
+            active_rentals = active_rentals + 1
+    for rental in rentals:
+        print(rental)
+        movies.append([i, [rental.movie.title, rental.rental_date]])
+        i = i+1
+    dict = {key: value for key, value in movies}
+    
+    
+    print(dict)
+    
+    return JsonResponse({"movies_rented": movies_rented,
+                         "amount_spent": amount_spent,
+                         "active_rentals": active_rentals,
+                         "movies": dict})
