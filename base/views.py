@@ -12,11 +12,13 @@ from .models import Customer
 from rest_framework.response import Response
 from rest_framework import status
 from datetime import datetime
-import pytz
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
 # function to render the home page
+@login_required
 def home(request):
     return render(request, 'index.html')
 
@@ -26,24 +28,31 @@ def base(request):
 
 
 # function to handle login from the user
-def login(request):
-    if request.method == "POST":
-        email = request.POST.get("username")
-        password = request.POST.get("password")
-        user = authenticate(request, username=email, password=password)
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        
+        user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            # redirect to a home page 
-            return redirect('/')
+            return redirect('/', {'user_name': username})
         else:
-            return render(request, 'login.html', {'error': 'Unable to login'})
-            # return an invalid error message 
-    return render(request, 'login.html')
+            
+            error = 'invalid user name or password'
+            return render(request, 'login.html', {'error': error})
+    return render(request, 'login.html' )
+
+def user_logout(request):
+    logout(request)
+    return redirect('/login')
 
 
+@login_required
 def customers(request):
     return render(request, 'customers.html')
 
+@login_required
 def movies(request):
     return render(request, 'movies.html')
 
@@ -253,9 +262,6 @@ def update_customer (request, id):
         zip_code = request.POST.get("zipcode")
         phone_number = request.POST.get("phone")
         customer = Customer.objects.get(pk=id)
-        print("fuck", city)
-        
-        print(f'{city} {zip_code} {phone_number} {email}')
         if city != None:
             customer.city = city
         if zip_code != None:
@@ -268,15 +274,12 @@ def update_customer (request, id):
         customer.save()
         
         return JsonResponse({"success": "success"})
+        with connection.cursor()as cursor:
+            cursor. execute (
+                "UPDATE base_customer SET city = %s, state = %s, zip_code = %s, phone_number = %s, email = %s, WHERE id = %s",
+                [city, state, zip_code, phone_number, email, id]
 
-        
-
-        #with connection.cursor()as cursor:
-        #    cursor. execute (
-        #        "UPDATE base_customer SET city = %s, state = %s, zip_code = %s, phone_number = %s, email = %s, WHERE id = %s",
-        #        [city, state, zip_code, phone_number, email, id]
-#
-        #    )
+            )
         return JsonResponse({"message": "success"})
 
 @api_view(['DELETE'])
@@ -300,7 +303,7 @@ def get_city(request, key):
 
         
     
-
+@login_required
 def transactions(request):
     return render(request, 'rentals.html')
 
@@ -349,7 +352,7 @@ def add_rental(request):
         #tax_rate = request.POST.get("tax_rate")
         db_movie =  Movie.objects.get(title=movie)
         cost = float(db_movie.price)
-        total_cost = cost + (cost*(float(15)/100))
+        total_cost = cost + (cost*(float(10)/100))
         first_name = customer.split(" ")[0]
         last_name= customer.split(" ")[1]
         

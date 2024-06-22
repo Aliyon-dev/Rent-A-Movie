@@ -38,7 +38,7 @@
           <div class="header">
             <div class="text-wrapper">
               <div class="text">
-                <b class="title">Hi, Aliyon!</b>
+                <b class="title">Hi, {{user.username}}</b>
                 <div class="body">Let’s check your progress today</div>
               </div>
             </div>
@@ -115,7 +115,7 @@
                   </div>
                   <div class="text-container">
                     <div class="text1">
-                      <b class="title1">Aliyon Tembo</b>
+                      <b class="title1">{{user.username}}</b>
                       <div class="body2">Admin</div>
                     </div>
                   </div>
@@ -200,7 +200,7 @@
           <div class="bg2"></div>
           <div class="frame-div">
             <div class="total-sales-parent">
-              <div class="total-sales1">Movies rented out</div>
+              <div class="total-sales1">Rentals</div>
               <b class="b6" id="rented">100</b>
             </div>
             <img class="icon5" alt="" src="{% static './public/icon-2@2x.png'%}" />
@@ -355,10 +355,34 @@
               </div>
             </div>
           </a>  
+
+
+
+
           </div>
         </div>
 
+
         <img class="divider-icon2" alt="" src="{% static './public/divider-2.svg'%}" />
+        
+        <div style="margin-left: 20px; margin-top: 280px">
+          <a href="{% url 'logout' %}" class="menu-item-link" style="text-decoration: none">
+            <div class="menu-itemstandard2" style="border: 2px solid #4880FF">
+              <div class="bx-movie-playsvg-parent">
+                <img
+                  class="bx-movie-playsvg-icon"
+                  alt=""
+                  src="{% static './public/bx-log-out.svg.svg'%}"/>
+                <div class="menu-item-frame">
+                  <b class="menu-item2" style="color: #4880FF">logout</b>
+                </div>
+              </div>
+            </div>
+          </a> 
+        </div>
+
+
+
       </div>
       <img class="frame-icon" loading="lazy" alt="" src="{% static './public/frame.svg'%}" />
     </div>

@@ -238,20 +238,7 @@
 
 
       <div class="modal-body">
-        <div class="message">
-          <img src="https://via.placeholder.com/40" alt="User">
-          <div class="content">
-            Sit meis deleniti eu, pri vidit meliore docendi ut, an eum erat animal commodo.
-          </div>
-          <div class="time">2:39 am</div>
-        </div>
-        <div class="message you">
-          <img src="https://via.placeholder.com/40" alt="You">
-          <div class="content">
-            Cum ea graeci tractatos.
-          </div>
-          <div class="time">2:40 am</div>
-        </div>
+        
         <!-- More messages as needed -->
       </div>
       <div class="modal-footer">
@@ -472,14 +459,14 @@
               </div>
             </div>
           </a>
-
-
+      
             <img
               class="divider-icon3"
               loading="lazy"
               alt=""
               src="{% static './public/divider-2.svg'%}"
             />
+            
           </div>
         </div>
       </div>
@@ -563,7 +550,7 @@
               <div class="search1"></div>
               <div class="header-content">
                 <div class="text2">
-                  <b class="title2">Hi, Aliyon!</b>
+                  <b class="title2">Hi, {{user.username}} </b>
                   <div class="body4">Let’s check your progress today</div>
                 </div>
               </div>
@@ -657,7 +644,7 @@
                   </div>
                   <div class="text-frame">
                     <div class="text3">
-                      <b class="title3">Aliyon Tembo</b>
+                      <b class="title3">{{user.username}}</b>
                       <div class="body5">Admin</div>
                     </div>
                   </div>
