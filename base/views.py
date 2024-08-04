@@ -349,7 +349,7 @@ def add_rental(request):
         movie   = request.POST.get("movie")
         rental_date = request.POST.get("rental_date")
         rental_expiry = request.POST.get("rental_expiry")
-        #tax_rate = request.POST.get("tax_rate")
+        tax_rate = request.POST.get("tax_rate")
         db_movie =  Movie.objects.get(title=movie)
         cost = float(db_movie.price)
         total_cost = cost + (cost*(float(10)/100))
